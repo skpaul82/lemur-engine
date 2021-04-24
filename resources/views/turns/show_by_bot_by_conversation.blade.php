@@ -8,7 +8,7 @@
 
     <!-- Conversations are loaded here -->
     <div class="direct-chat-messages">
-    @foreach($fullConversation->turns as $index => $item)
+    @foreach($fullConversation->conversationHumanLogs as $index => $item)
 
 
 

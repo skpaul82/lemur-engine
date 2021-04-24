@@ -822,3 +822,11 @@ textarea.form-control-span {
 .item.selected-conversation  {
     background-color: lightgray;
 }
+
+.profile-user-img {
+    margin: 0 auto;
+    width: 100px;
+    padding: 3px;
+    height: 100px;
+    border: 3px solid #d2d6de;
+}

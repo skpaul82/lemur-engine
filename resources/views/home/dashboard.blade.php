@@ -23,7 +23,7 @@
                         <div class="home-info-box-content">
                             <span class="info-box-text">{!! $bot->name !!}</span>
                             <span class="info-box-number">{!! $bot->summary !!}</span>
-                            <span class="text-muted-wrapped">{!! $bot->conversationTurnsLast28Days->count() !!} conversations in last 28 days</span>
+                            <span class="text-muted-wrapped">{!! $bot->conversationTurnsLast28Days->count() !!} interactions in last 28 days</span>
                         </div>
                         <!-- /.info-box-content -->
                         <div class="info-box-small">
