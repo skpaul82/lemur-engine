@@ -77,14 +77,14 @@ class BotDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
                     addRowFeatures(settings, json, "'.$this->link.'","")
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 10
+                    var maxColumn = 9
                     var dateFields =[maxColumn-1]
                     var exactSearchFields = [0]
                     var noSearchFields = [maxColumn]

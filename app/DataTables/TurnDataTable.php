@@ -79,7 +79,7 @@ class TurnDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+             ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
                     addRowFeatures(settings, json, "'.$this->link.'","")
@@ -99,7 +99,6 @@ class TurnDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner create-item',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner export-items',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner print-items',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner reset-table',],
