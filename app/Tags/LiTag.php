@@ -167,20 +167,16 @@ class LiTag extends AimlTag
                 $conditionValue = $this->conversation->getVar($name, '');
             }
 
-echo $liValue."<  >".$conditionValue."<br/>";
             $liValue = str_replace("*","(.*)",$liValue);
 
             //so at this point we might have matched li will be our answer or we will have the default one remaining...
             //so if we have a match send it up the stack to the tempContents
             //and if we get the to default lets send if up the stack and only use if nothing exists
             if ($liValue === $conditionValue && !$parentObject->hasTmpContents()) {
-                echo __LINE__."<br/>";
                 $parentObject->setTmpContents($contents);
             } elseif(preg_match('/^'.$liValue."$/i", $conditionValue, $matches)&& !$parentObject->hasTmpContents()) {
-                echo __LINE__."<br/>";
                 $parentObject->setTmpContents($contents);
             } elseif(!$isLoop && $defaultValue && !$parentObject->hasTmpContents()) {
-                echo __LINE__."default<br/>$contents";
                 $parentObject->setTmpContents($contents);
             }
 

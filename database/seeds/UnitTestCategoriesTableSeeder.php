@@ -447,7 +447,7 @@ class UnitTestCategoriesTableSeeder extends Seeder
                     'that' => "",
                     'regexp_that' => "",
                     'first_letter_that' => "",
-                    'template' => "<condition name='condition_test_firstname'><li value='unknown'>I dont know your name.</li><li>Your name is <get name='condition_test_firstname'/></li></condition>",
+                    'template' => "<condition name='condition_test_firstname'><li value=''>I dont know your name.</li><li>Your name is <get name='condition_test_firstname'/></li></condition>",
                     'status' => "A",
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -735,7 +735,7 @@ class UnitTestCategoriesTableSeeder extends Seeder
                     'that' => "",
                     'regexp_that' => "",
                     'first_letter_that' => "",
-                    'template' => "<condition name='condition_test_firstname'><li value='unknown'>You have not told me your name.</li><li>Your name is <get name='condition_test_firstname' /></li></condition>",
+                    'template' => "<condition name='condition_test_firstname'><li value=''>You have not told me your name.</li><li>Your name is <get name='condition_test_firstname' /></li></condition>",
                     'status' => "A",
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -1023,7 +1023,7 @@ class UnitTestCategoriesTableSeeder extends Seeder
                     'that' => "",
                     'regexp_that' => "",
                     'first_letter_that' => "",
-                    'template' => "<condition name='firstname_value_test'><li><value>unknown</value>I dont know your name.</li><li>Your name is <get name='firstname_value_test'/></li></condition>",
+                    'template' => "<condition name='firstname_value_test'><li><value></value>I dont know your name.</li><li>Your name is <get name='firstname_value_test'/></li></condition>",
                     'status' => "A",
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

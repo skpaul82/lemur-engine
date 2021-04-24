@@ -17,7 +17,7 @@ return [
         'thatstar' => 'unknown',
         'topicstar' => 'unknown',
         'global_property' => '',
-        'var_property' => 'unknown',
+        'var_property' => '',
         ],
     'defaultPosition' => [
         'that' => [0=>1, 1=>1]
