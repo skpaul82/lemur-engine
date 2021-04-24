@@ -1,0 +1,58 @@
+# Project/IDE files
+.DS_Store
+nbproject/
+.idea/*
+.vagrant/*
+node_modules
+Homestead.json
+Homestead.yaml
+*.iml
+npm-debug.log
+yarn-error.log
+*.iml
+vendor/*
+.composer/*
+
+# Application env files - do not commit
+.env.prod
+.env.local
+.env.dev
+.env.testing
+.env
+
+# Laravel Storage
+storage/*.index
+storage/*.key
+
+# Laravel Storage App
+!storage/app/public/.gitignore
+!storage/app/images/.gitignore
+# Laravel Storage Framework
+storage/framework/cache/data/
+# Laravel Storage Logs
+!storage/logs/.gitignore
+
+# the symbolical links
+public/images
+public/widgets
+
+# Do not commit testing files
+database/seeds/dumps/*
+tests/resources/*
+.phpunit.result.cache
+
+# Elastic Beanstalk Files and Deployment Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+deploy.md
+deploy.sh
+.deploy_version
+.ebignore
+.platform/*
+.ebextensions/*
+laravel.conf
+static.conf
+https.conf
+
+composer.lock

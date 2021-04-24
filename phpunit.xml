@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="bootstrap/app.php"
+         colors="true"
+         verbose="true">
+    <testsuites>
+
+        <testsuite name="All">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Controllers</directory>
+            <directory suffix="Test.php">./tests/AIML</directory>
+            <directory suffix="Test.php">./tests/Classes</directory>
+            <directory suffix="Test.php">./tests/Tags</directory>
+            <directory suffix="Test.php">./tests/Requests</directory>
+            <directory suffix="Test.php">./tests/Repositories</directory>
+            <directory suffix="Test.php">./tests/Policies</directory>
+        </testsuite>
+
+        <testsuite name="Aiml">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/AIML</directory>
+        </testsuite>
+
+        <testsuite name="Classes">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Classes</directory>
+        </testsuite>
+
+        <testsuite name="Tags">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Tags</directory>
+        </testsuite>
+
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Requests">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Requests</directory>
+        </testsuite>
+
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+
+        <testsuite name="Repositories">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Repositories</directory>
+        </testsuite>
+
+        <testsuite name="Controllers">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Controllers</directory>
+        </testsuite>
+
+        <testsuite name="APIs">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/APIs</directory>
+        </testsuite>
+
+        <testsuite name="Policies">
+            <directory suffix="Test.php">./tests/Setup</directory>
+            <directory suffix="Test.php">./tests/Policies</directory>
+        </testsuite>
+
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_URL" value="http://localhost"/>
+        <env name="DB_CONNECTION" value="testing"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+    </php>
+</phpunit>

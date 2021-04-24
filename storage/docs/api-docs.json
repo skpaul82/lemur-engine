@@ -1,0 +1,1376 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Lemur Engine API Docs",
+        "version": "1.0.0"
+    },
+    "basePath": "/api/",
+    "paths": {},
+    "definitions": {
+        "BotRequest": {
+            "required": [
+                "name",
+                "summary",
+                "description",
+                "status"
+            ],
+            "properties": {
+                "language": {
+                    "description": "language",
+                    "type": "string",
+                    "default": "en"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "summary",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "default_response": {
+                    "description": "default_response",
+                    "type": "string",
+                    "default": "I do not have a response for that"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "string",
+                    "default": "testing",
+                    "enum": [
+                        "active",
+                        "hidden",
+                        "testing"
+                    ]
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean",
+                    "default": false
+                },
+                "is_public": {
+                    "description": "is_public",
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "BotResponse": {
+            "required": [
+                "slug",
+                "language",
+                "name",
+                "summary",
+                "description",
+                "default_response",
+                "status"
+            ],
+            "properties": {
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "language",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "summary",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "default_response": {
+                    "description": "default_response",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "image",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "is_public": {
+                    "description": "is_public",
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "BotCategoryGroupRequest": {
+            "required": [
+                "bot",
+                "category_group"
+            ],
+            "properties": {
+                "bot_id": {
+                    "description": "The slug of the bot (bots.slug)",
+                    "type": "string"
+                },
+                "category_group_id": {
+                    "description": "The slug of the category_group (category_groups.slug)",
+                    "type": "string"
+                }
+            }
+        },
+        "BotCategoryGroupResponse": {
+            "properties": {
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "bot_id": {
+                    "description": "The slug of the bot (bots.slug)",
+                    "type": "string"
+                },
+                "category_group_id": {
+                    "description": "The slug of the category_group (category_groups.slug)",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "BotKey": {
+            "required": [
+                "bot_id",
+                "slug",
+                "name",
+                "description",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "BotProperty": {
+            "required": [
+                "bot_id",
+                "slug",
+                "name",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "BotWordSpellingGroup": {
+            "required": [
+                "bot_id",
+                "word_spelling_group_id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "word_spelling_group_id": {
+                    "description": "word_spelling_group_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Category": {
+            "required": [
+                "category_group_id",
+                "slug",
+                "pattern",
+                "regexp_pattern",
+                "first_letter_pattern",
+                "topic",
+                "regexp_topic",
+                "first_letter_topic",
+                "that",
+                "regexp_that",
+                "first_letter_that",
+                "template",
+                "status"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "category_group_id": {
+                    "description": "category_group_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "pattern": {
+                    "description": "pattern",
+                    "type": "string"
+                },
+                "regexp_pattern": {
+                    "description": "regexp_pattern",
+                    "type": "string"
+                },
+                "first_letter_pattern": {
+                    "description": "first_letter_pattern",
+                    "type": "string"
+                },
+                "topic": {
+                    "description": "topic",
+                    "type": "string"
+                },
+                "regexp_topic": {
+                    "description": "regexp_topic",
+                    "type": "string"
+                },
+                "first_letter_topic": {
+                    "description": "first_letter_topic",
+                    "type": "string"
+                },
+                "that": {
+                    "description": "that",
+                    "type": "string"
+                },
+                "regexp_that": {
+                    "description": "regexp_that",
+                    "type": "string"
+                },
+                "first_letter_that": {
+                    "description": "first_letter_that",
+                    "type": "string"
+                },
+                "template": {
+                    "description": "template",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "CategoryGroup": {
+            "required": [
+                "user_id",
+                "language_id",
+                "slug",
+                "name",
+                "description",
+                "status",
+                "is_master"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "language_id": {
+                    "description": "language_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Client": {
+            "required": [
+                "bot_id",
+                "slug",
+                "is_banned"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "is_banned": {
+                    "description": "is_banned",
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "ClientCategory": {
+            "required": [
+                "client_id",
+                "bot_id",
+                "turn_id",
+                "slug",
+                "pattern",
+                "template",
+                "tag"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "client_id": {
+                    "description": "client_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "turn_id": {
+                    "description": "turn_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "pattern": {
+                    "description": "pattern",
+                    "type": "string"
+                },
+                "template": {
+                    "description": "template",
+                    "type": "string"
+                },
+                "tag": {
+                    "description": "tag",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Conversation": {
+            "required": [
+                "slug",
+                "bot_id",
+                "client_id",
+                "allow_html"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "client_id": {
+                    "description": "client_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "allow_html": {
+                    "description": "allow_html",
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "ConversationProperty": {
+            "required": [
+                "conversation_id",
+                "slug",
+                "name",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "conversation_id": {
+                    "description": "conversation_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "EmptyResponse": {
+            "required": [
+                "bot_id",
+                "slug",
+                "input",
+                "occurrences"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bot_id": {
+                    "description": "bot_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "input": {
+                    "description": "input",
+                    "type": "string"
+                },
+                "occurrences": {
+                    "description": "occurrences",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Language": {
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Map": {
+            "required": [
+                "user_id",
+                "slug",
+                "name",
+                "description",
+                "is_master"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "MapValue": {
+            "required": [
+                "map_id",
+                "user_id",
+                "slug",
+                "word",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "map_id": {
+                    "description": "map_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "word": {
+                    "description": "word",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Normalization": {
+            "required": [
+                "language_id",
+                "slug",
+                "original_value",
+                "normalized_value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "language_id": {
+                    "description": "language_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "original_value": {
+                    "description": "original_value",
+                    "type": "string"
+                },
+                "normalized_value": {
+                    "description": "normalized_value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Set": {
+            "required": [
+                "user_id",
+                "slug",
+                "name",
+                "description",
+                "is_master"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "SetValue": {
+            "required": [
+                "set_id",
+                "user_id",
+                "slug",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "set_id": {
+                    "description": "set_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Turn": {
+            "required": [
+                "conversation_id",
+                "slug",
+                "input",
+                "output",
+                "status",
+                "source",
+                "is_display"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "conversation_id": {
+                    "description": "conversation_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "category_id": {
+                    "description": "category_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "input": {
+                    "description": "input",
+                    "type": "string"
+                },
+                "output": {
+                    "description": "output",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "state",
+                    "type": "string"
+                },
+                "source": {
+                    "description": "source",
+                    "type": "string"
+                },
+                "is_display": {
+                    "description": "is_display",
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "User": {
+            "required": [
+                "slug",
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email",
+                    "type": "string"
+                },
+                "email_verified_at": {
+                    "description": "email_verified_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "password": {
+                    "description": "password",
+                    "type": "string"
+                },
+                "api_token": {
+                    "description": "api_token",
+                    "type": "string"
+                },
+                "remember_token": {
+                    "description": "remember_token",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Wildcard": {
+            "required": [
+                "conversation_id",
+                "slug",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "conversation_id": {
+                    "description": "conversation_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "type",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "WordSpelling": {
+            "required": [
+                "word_spelling_group_id",
+                "slug",
+                "word",
+                "replacement"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "word_spelling_group_id": {
+                    "description": "word_spelling_group_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "word": {
+                    "description": "word",
+                    "type": "string"
+                },
+                "replacement": {
+                    "description": "replacement",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "WordSpellingGroup": {
+            "required": [
+                "language_id",
+                "slug",
+                "name",
+                "description",
+                "is_master"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "language_id": {
+                    "description": "language_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "WordTransformation": {
+            "required": [
+                "language_id",
+                "slug",
+                "first_person_form",
+                "second_person_form",
+                "third_person_form",
+                "third_person_form_female",
+                "third_person_form_male",
+                "is_master"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "language_id": {
+                    "description": "language_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "slug": {
+                    "description": "slug",
+                    "type": "string"
+                },
+                "first_person_form": {
+                    "description": "first_person_form",
+                    "type": "string"
+                },
+                "second_person_form": {
+                    "description": "second_person_form",
+                    "type": "string"
+                },
+                "third_person_form": {
+                    "description": "third_person_form",
+                    "type": "string"
+                },
+                "third_person_form_female": {
+                    "description": "third_person_form_female",
+                    "type": "string"
+                },
+                "third_person_form_male": {
+                    "description": "third_person_form_male",
+                    "type": "string"
+                },
+                "is_master": {
+                    "description": "is_master",
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "description": "deleted_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
