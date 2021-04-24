@@ -289,7 +289,9 @@ class LemurStr
         $str = str_replace(" !", "!", $str);
         $str = str_replace(" ?", "?", $str);
         $str = str_replace(" .", ".", $str);
-        //$str = preg_replace('(.*)" (.*) "(.*)/\s+/', '$1 "$2" $3', $str);
+        $str = str_replace(" ,", ",", $str);
+        $str = str_replace(" :", ":", $str);
+        $str = str_replace(" ;", ";", $str);
         $str = preg_replace('/\s+/', ' ', $str);
         $str = trim($str);
         return $str;

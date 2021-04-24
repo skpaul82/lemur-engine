@@ -150,30 +150,37 @@ class LiTag extends AimlTag
 
             //our li needs a value ...
             if ($this->hasAttribute('VALUE')) { //this item just has to exist
-                $liValue = $this->getAttribute('VALUE');
+                $liValue = $this->getAttribute('VALUE','');
+                $defaultValue = false;
+            }else{
+                $defaultValue = true;
             }
             if ($this->hasAttribute('NAME')) { //this item just has to exist
                 $name = $this->getAttribute('NAME');
-                $conditionValue = $this->conversation->getGlobalProperty($name, 'unknown');
+                $conditionValue = $this->conversation->getGlobalProperty($name, '');
+
             }elseif ($parentObject->hasAttribute('NAME')) { //this item just has to exist
                 $name = $parentObject->getAttribute('NAME');
-                $conditionValue = $this->conversation->getGlobalProperty($name, 'unknown');
+                $conditionValue = $this->conversation->getGlobalProperty($name, '');
             } elseif ($parentObject->hasAttribute('VAR')) {
                 $name = $parentObject->getAttribute('VAR');
-                $conditionValue = $this->conversation->getVar($name, 'unknown');
+                $conditionValue = $this->conversation->getVar($name, '');
             }
 
-
+echo $liValue."<  >".$conditionValue."<br/>";
             $liValue = str_replace("*","(.*)",$liValue);
 
             //so at this point we might have matched li will be our answer or we will have the default one remaining...
             //so if we have a match send it up the stack to the tempContents
             //and if we get the to default lets send if up the stack and only use if nothing exists
             if ($liValue === $conditionValue && !$parentObject->hasTmpContents()) {
+                echo __LINE__."<br/>";
                 $parentObject->setTmpContents($contents);
             } elseif(preg_match('/^'.$liValue."$/i", $conditionValue, $matches)&& !$parentObject->hasTmpContents()) {
+                echo __LINE__."<br/>";
                 $parentObject->setTmpContents($contents);
-            } elseif(!$isLoop && !$liValue && !$parentObject->hasTmpContents()) {
+            } elseif(!$isLoop && $defaultValue && !$parentObject->hasTmpContents()) {
+                echo __LINE__."default<br/>$contents";
                 $parentObject->setTmpContents($contents);
             }
 
