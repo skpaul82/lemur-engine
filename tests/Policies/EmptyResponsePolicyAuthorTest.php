@@ -17,7 +17,7 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     private $user;
     private $policy;
     private $modelItemCreatedByLoggedInUser;
-    private $modelItemCreatedByAdminMasterItem;
+    private $modelItemCreatedByAdminPublicItem;
     private $modelItemCreatedByAdmin;
     private $modelItemCreatedByDifferentAuthor;
 
@@ -42,7 +42,7 @@ class EmptyResponsePolicyAuthorTest extends TestCase
 
         $this->modelItemCreatedByLoggedInUser = $this->getModelItem($this->user);
         $this->modelItemCreatedByAdmin = $this->getModelItem($admin);
-        $this->modelItemCreatedByAdminMasterItem = $this->getModelItem($admin, true);
+        $this->modelItemCreatedByAdminPublicItem = $this->getModelItem($admin, true);
         $this->modelItemCreatedByDifferentAuthor = $this->getModelItem($userTwo);
 
         //set to the user we are testing
@@ -54,13 +54,13 @@ class EmptyResponsePolicyAuthorTest extends TestCase
      * get the model item created by a specific user
      *
      * @param $user
-     * @param $isMaster
+     * @param $isPublic
      * @return Collection|\Illuminate\Database\Eloquent\Model|mixed
      */
-    public function getModelItem($user, $isMaster = false)
+    public function getModelItem($user, $isPublic = false)
     {
         $this->be($user);
-        $bot = factory(Bot::class)->create(['language_id'=>1, 'is_master'=>$isMaster]);
+        $bot = factory(Bot::class)->create(['language_id'=>1, 'is_public'=>$isPublic]);
         return factory(EmptyResponse::class)->create(['bot_id'=>$bot->id]);
     }
 
@@ -98,11 +98,11 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     }
 
     /**
-     * test that the user can view an admin item when is_master is true
+     * test that the user cannot view an admin item when is_public is true
      */
-    public function testCannotViewAsAuthorAdminMasterItem()
+    public function testCannotViewAsAuthorAdminPublicItem()
     {
-        $response = $this->policy->view($this->user, $this->modelItemCreatedByAdminMasterItem);
+        $response = $this->policy->view($this->user, $this->modelItemCreatedByAdminPublicItem);
         $this->assertFalse($response->allowed());
     }
 
@@ -156,11 +156,11 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     }
 
     /**
-     * test that the user can update an admin item when is_master is true
+     * test that the user can update an admin item when is_public is true
      */
-    public function testCannotUpdateAuthorAdminMasterItem()
+    public function testCannotUpdateAuthorAdminPublicItem()
     {
-        $response = $this->policy->update($this->user, $this->modelItemCreatedByAdminMasterItem);
+        $response = $this->policy->update($this->user, $this->modelItemCreatedByAdminPublicItem);
         $this->assertFalse($response->allowed());
     }
 
@@ -199,11 +199,11 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     }
 
     /**
-     * test that the user cannot delete an admin item when is_master is true
+     * test that the user cannot delete an admin item when is_public is true
      */
-    public function testCannotDeleteAuthorAdminMasterItem()
+    public function testCannotDeleteAuthorAdminPublicItem()
     {
-        $response = $this->policy->delete($this->user, $this->modelItemCreatedByAdminMasterItem);
+        $response = $this->policy->delete($this->user, $this->modelItemCreatedByAdminPublicItem);
         $this->assertFalse($response->allowed());
     }
 
@@ -242,11 +242,11 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     }
 
     /**
-     * test that the user cannot restore an admin item when is_master is true
+     * test that the user cannot restore an admin item when is_public is true
      */
-    public function testCannotRestoreAuthorAdminMasterItem()
+    public function testCannotRestoreAuthorAdminPublicItem()
     {
-        $response = $this->policy->delete($this->user, $this->modelItemCreatedByAdminMasterItem);
+        $response = $this->policy->delete($this->user, $this->modelItemCreatedByAdminPublicItem);
         $this->assertFalse($response->allowed());
     }
 
@@ -285,11 +285,11 @@ class EmptyResponsePolicyAuthorTest extends TestCase
     }
 
     /**
-     * test that the user cannot force delete an admin item when is_master is true
+     * test that the user cannot force delete an admin item when is_public is true
      */
-    public function testCannotForceDeleteAuthorAdminMasterItem()
+    public function testCannotForceDeleteAuthorAdminPublicItem()
     {
-        $response = $this->policy->forceDelete($this->user, $this->modelItemCreatedByAdminMasterItem);
+        $response = $this->policy->forceDelete($this->user, $this->modelItemCreatedByAdminPublicItem);
         $this->assertFalse($response->allowed());
     }
 

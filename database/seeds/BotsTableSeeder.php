@@ -27,7 +27,6 @@ class BotsTableSeeder extends Seeder
                 'lemurtar_url' => 'https://lemurtar.com/?accessoriesType=Blank&avatarStyle=Circle&clotheColor=Pink&clotheType=Overall&eyeType=Default&eyebrowType=DefaultNatural&facialHairColor=Brown&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=Blue02&mouthType=Twinkle&skinColor=Tanned&topType=ShortHairShaggyMullet',
                 'status' => 'A',
                 'image' => 'widgets/dilly.png',
-                'is_master' => 1,
                 'is_public' => 1,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

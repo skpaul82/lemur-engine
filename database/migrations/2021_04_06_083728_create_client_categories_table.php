@@ -17,13 +17,13 @@ class CreateClientCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id')->index('client_id');
             $table->unsignedBigInteger('bot_id')->index('bot_id');
+            $table->unsignedBigInteger('turn_id')->index('turn_id');
             $table->string('slug')->unique();
             $table->string('pattern');
             $table->text('template');
             $table->string('tag');
             $table->softDeletes();
             $table->timestamps();
-            $table->unsignedBigInteger('turn_id')->index('turn_id');
             $table->index(['client_id', 'bot_id', 'pattern'], 'client_categories_ibix_1');
         });
     }

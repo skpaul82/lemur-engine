@@ -75,22 +75,3 @@
 
 
 <div class="clearfix"></div>
-
-<!-- 'Boolean FIELD_NAME_TITLE$ Field' checked by default -->
-<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="is_display_div">
-    {!! Form::label('is_display', 'Is Display:', ['data-test'=>"is_display_label"]) !!}
-    <div class="input-group" data-test="is_display_group">
-        <span class="input-group-addon">
-            {!! Form::hidden('is_display', 0) !!}
-            @if(empty($turn) || $turn->is_display==0 || !$turn->is_display)
-                @php $checked = ''; @endphp
-            @else
-                @php $checked = true; @endphp
-            @endif
-            {{ Form::checkbox('is_display', '1', $checked, ['id'=>"is_display_field", 'data-test'=>"is_display_field"])  }}
-         </span>
-         <input type="text" class="form-control" aria-label="..." value="Is Display?">
-    </div><!-- /.col-lg-6 -->
-</div>
-
-<div class="clearfix"></div>

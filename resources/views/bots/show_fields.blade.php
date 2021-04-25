@@ -58,13 +58,6 @@
     <p>{{ $bot->status }}</p>
 </div>
 
-<!-- Is Master Field -->
-<div class="form-group">
-    {!! Form::label('is_master', 'Is Master:') !!}
-    <p>{{ $bot->is_master }}</p>
-</div>
-
-
 <!-- Is Public Field -->
 <div class="form-group">
     {!! Form::label('is_public', 'Is Public:') !!}

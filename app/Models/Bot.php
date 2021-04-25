@@ -52,12 +52,6 @@ use willvincent\Rateable\Rateable;
  *          enum={"active", "hidden", "testing"}
  *      ),
  *      @SWG\Property(
- *          property="is_master",
- *          description="is_master",
- *          type="boolean",
- *          default=false
- *      ),
- *      @SWG\Property(
  *          property="is_public",
  *          description="is_public",
  *          type="boolean",
@@ -110,11 +104,6 @@ use willvincent\Rateable\Rateable;
  *          property="status",
  *          description="status",
  *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="is_master",
- *          description="is_master",
- *          type="boolean"
  *      ),
  *      @SWG\Property(
  *          property="is_public",
@@ -170,7 +159,6 @@ class Bot extends Model
         'image',
         'status',
         'is_public',
-        'is_master',
     ];
 
     /**
@@ -190,7 +178,6 @@ class Bot extends Model
         'lemurtar_url' => 'string',
         'image' => 'string',
         'status' => 'string',
-        'is_master' => 'boolean',
         'is_public' => 'boolean',
 
     ];
@@ -209,9 +196,7 @@ class Bot extends Model
         'lemurtar_url' => 'nullable|string',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|dimensions:max_width=256,max_height=256|max:512',
         'status' => 'required|in:A,T,H',
-        'is_master' => 'boolean',
         'is_public' => 'boolean',
-        'is_showcase' => 'boolean',
     ];
 
 
@@ -225,10 +210,6 @@ class Bot extends Model
             $loggedInUser = Auth::user();
             //set the user to the current logged in user
             $model->user_id = $loggedInUser->id;
-            //if the user is not an admin overwrite is master with 0
-            if (!$loggedInUser->hasRole('admin')) {
-                $model->is_master = 0;
-            }
             //always create with the default image.. we can update in a moment when we process the image
             $model->image = config('lemur.default_bot_image');
         });
@@ -438,7 +419,7 @@ class Bot extends Model
             return $query;
         } else {
             //users can read their own or any master bots
-            return $query->where('user_id', $thisLoggedInUser->id)->orWhereTrue('is_master');
+            return $query->where('user_id', $thisLoggedInUser->id)->orWhereTrue('is_public');
         }
     }
 

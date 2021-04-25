@@ -513,8 +513,8 @@ class AimlMatcher
             'categories.regexp_that',
             'categories.first_letter_that',
             'categories.template',
-            'category_groups.name',
-            'category_groups.slug'
+            'category_groups.name as category_group_name',
+            'category_groups.slug as category_group_slug'
         )
             ->whereIn('category_group_id', $allowedCategoryGroupIds)
             ->join('category_groups', 'category_groups.id', '=', 'categories.category_group_id')

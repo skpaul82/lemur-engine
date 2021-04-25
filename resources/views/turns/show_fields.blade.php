@@ -34,12 +34,6 @@
     <p>{{ $turn->source }}</p>
 </div>
 
-<!-- Is Display Field -->
-<div class="form-group">
-    {!! Form::label('is_display', 'Is Display:') !!}
-    <p>{{ $turn->is_display }}</p>
-</div>
-
 <!-- Updated At Field -->
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated:') !!}

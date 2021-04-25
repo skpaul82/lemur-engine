@@ -32,15 +32,13 @@ class HomeController extends Controller
     public function index()
     {
 
-        $bots = Bot::where('user_id', Auth::user()->id)->orWhere('is_master', 1)
-            ->orderBy('is_master')->orderBy('name')->get();
+        $authorBots = Bot::where('user_id', Auth::user()->id)->orderBy('name')->get();
 
-        $backGroundColorArr = ['bg-aqua', 'bg-green' ,'bg-yellow', 'bg-red'];
+        $publicBots = Bot::where('user_id', '!=', Auth::user()->id)->where('is_public', 1)->orderBy('name')->get();
 
         return view('home')->with(
             [
-            'bots'=>$bots,
-            'backGroundColorArr'=>$backGroundColorArr]
+            'authorBots'=>$authorBots, 'publicBots'=>$publicBots]
         );
     }
 }

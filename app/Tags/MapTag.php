@@ -72,8 +72,8 @@ class MapTag extends AimlTag
 
 
             if ($newContents=='no_map_found') {
-                //todo ownership
-                $map = Map::where('name', $mapName)->first();
+
+                $map = $this->getListOfAllowedMaps($mapName);
 
                 if ($map!=null) {
                     $mapValue = MapValue::where('map_id', $map->id)->where('word', $contents)->first();
@@ -88,5 +88,20 @@ class MapTag extends AimlTag
 
             $this->buildResponse($newContents);
         }
+    }
+
+
+    public function getListOfAllowedMaps($mapName){
+
+        //the maps has a user id
+        $mapUserId = $this->conversation->bot->user_id;
+
+        return Map::where('name',$mapName)
+            ->where(function ($query)  use($mapUserId) {
+                //it has to be owned by the bot author or be a master record
+                $query->where('maps.user_id',$mapUserId)
+                    ->orWhere('maps.is_master', 1);
+            })->first();
+
     }
 }
