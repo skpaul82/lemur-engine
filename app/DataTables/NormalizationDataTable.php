@@ -114,7 +114,7 @@ class NormalizationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'language'=> ['title'=>'Lang'],
+            'language'=> ['name'=>'languages.name','data'=>'language','title'=>'Lang'],
             'original_value',
             'normalized_value',
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',

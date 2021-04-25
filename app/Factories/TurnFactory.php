@@ -45,7 +45,6 @@ class TurnFactory
             'conversation_id' => $conversation->id,
             'parent_turn_id' =>$parentTurnId,
             "input" => $input['message'],
-            "is_display" => 1,
             'status' => 'C',
             "source" => $source
         ]);

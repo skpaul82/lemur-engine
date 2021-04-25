@@ -118,7 +118,7 @@ class WordTransformationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'language'=> ['title'=>'Lang'],
+            'language'=> ['name'=>'languages.name','data'=>'language','title'=>'Lang'],
             'first_person_form' => ['title'=>'1stPerson'],
             'second_person_form'=> ['title'=>'2ndPerson'],
             'third_person_form'=> ['title'=>'3rdPerson'],

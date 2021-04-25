@@ -31,7 +31,6 @@ class BotRepository extends BaseRepository
         'lemurtar_url',
         'image',
         'status',
-        'is_master',
         'is_public'
     ];
 

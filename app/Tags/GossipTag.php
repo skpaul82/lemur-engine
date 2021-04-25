@@ -79,8 +79,12 @@ class GossipTag extends AimlTag
         //if we are in learning mode send the response back up the stack
         if ($this->isInLearningMode()) {
             $contents = $this->getCurrentResponse(true);
-            $contents = $this->buildAIMLIfInLearnMode($contents);
-            $this->buildResponse("<category>$contents</category>");
+
+            $contents = str_replace("unknown said", "someone said", $contents);
+
+            $contents = "<category><pattern>GOSSIP</pattern><template>$contents</template></category>";
+
+            $this->buildResponse($contents);
         } else {
             $botId = $this->conversation->bot->id;
 

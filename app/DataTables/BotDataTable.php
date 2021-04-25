@@ -84,7 +84,7 @@ class BotDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 9
+                    var maxColumn = 8
                     var dateFields =[maxColumn-1]
                     var exactSearchFields = [0]
                     var noSearchFields = [maxColumn]
@@ -116,19 +116,10 @@ class BotDataTable extends DataTable
     {
         return [
             'slug'=> ['name'=>'bots.slug','data'=>'slug','title'=>'Id'],
-            'language'=> ['title'=>'Lang'],
+            'language'=> ['name'=>'languages.name','data'=>'language','title'=>'Lang'],
             'name',
             'summary' => ['name'=>'summary','data'=>'summary','title'=>'Summary','searchable'=>true,
                 'printable'=>true, 'exportable'=>true,'defaultContent'=>''],
-            'is_master' => ['name'=>'is_master','data'=>'is_master','title'=>'Master Data?',
-                'searchable'=>true, 'printable'=>true, 'exportable'=>true,'defaultContent'=>'false', 'render' =>
-                function () {
-                    return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'is_master\'); // 
-                 }
-                 ';
-                }],
             'status',
             'is_public' => ['name'=>'is_public','data'=>'is_public','title'=>'Public?','searchable'=>true,
                 'printable'=>true, 'exportable'=>true,'defaultContent'=>'null', 'render' =>

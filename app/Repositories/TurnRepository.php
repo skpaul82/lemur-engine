@@ -26,7 +26,6 @@ class TurnRepository extends BaseRepository
         'output',
         'status',
         'source',
-        'is_display',
     ];
 
     /**

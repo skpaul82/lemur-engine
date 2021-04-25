@@ -14,7 +14,7 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @SWG\Definition(
  *      definition="Turn",
- *      required={"conversation_id", "slug", "input", "output", "status", "source", "is_display"},
+ *      required={"conversation_id", "slug", "input", "output", "status", "source"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -52,11 +52,6 @@ use Spatie\Sluggable\SlugOptions;
  *          property="source",
  *          description="source",
  *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="is_display",
- *          description="is_display",
- *          type="boolean"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -104,7 +99,6 @@ class Turn extends Model
         'output',
         'status',
         'source',
-        'is_display',
     ];
 
     /**
@@ -123,7 +117,6 @@ class Turn extends Model
         'output' => 'string',
         'status' => 'string',
         'source' => 'string',
-        'is_display' => 'boolean',
     ];
 
     /**
@@ -139,7 +132,6 @@ class Turn extends Model
         'output' => 'required|string',
         'status' => 'string|max:1',
         'source' => 'required|string|max:255',
-        'is_display' => 'required|boolean',
     ];
 
     /**

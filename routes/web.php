@@ -77,6 +77,18 @@ Route::GET('/test', 'TestController@index')
 Route::GET('/test/run', 'TestController@run')
     ->middleware(['auth:web']);
 
+
+/** ---------------------------------------------------------------
+ *  Create category from an empty response
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/quickchat'], function () {
+
+    Route::GET('/', 'BotController@quickChat')
+        ->middleware('auth:web');
+
+});
+
+
 /** ---------------------------------------------------------------
  *  Create category from an empty response
  ** -------------------------------------------------------------- */

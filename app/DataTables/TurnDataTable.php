@@ -86,7 +86,7 @@ class TurnDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 10
+                    var maxColumn = 9
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,2]
                     var noSearchFields = [maxColumn]
@@ -140,15 +140,6 @@ class TurnDataTable extends DataTable
             'output',
             'status',
             'source',
-            'is_display' => ['name'=>'is_display','data'=>'is_display','title'=>'Display?','searchable'=>true,
-                'printable'=>true, 'exportable'=>true,'defaultContent'=>'null', 'render' =>
-                function () {
-                    return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'is_display\'); // 
-                 }
-                 ';
-                }],
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {

@@ -45,7 +45,6 @@ $factory->define(Bot::class, function (Faker $faker) {
             '&topType='.$t14,
         'default_response' => 'pardon?',
         'is_public' => $faker->boolean,
-        'is_master' => $faker->boolean,
         'status' => $faker->randomElement(array_flip(config('lemur_dropdown.item_status'))),
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()

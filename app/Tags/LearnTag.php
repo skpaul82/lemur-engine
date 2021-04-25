@@ -79,15 +79,15 @@ class LearnTag extends AimlTag
 
         $contents = $this->getCurrentResponse(true);
 
+
+        if(trim($contents)==''){
+            return;
+        }
+
         $aiml = simplexml_load_string($contents);
 
-        if (!empty($aiml->gossip)) {
-            $pattern = 'GOSSIP';
-            $template = $aiml->gossip;
-        } else {
-            $pattern = $aiml->pattern;
-            $template = $aiml->template;
-        }
+        $pattern = $aiml->pattern;
+        $template = $aiml->template;
 
 
         $botId = $this->conversation->bot->id;
@@ -95,9 +95,7 @@ class LearnTag extends AimlTag
         $turnId = $this->conversation->currentTurnId();
 
 
-        $clientCategory = ClientCategory::where('pattern', $pattern)
-            ->where('bot_id', $botId)->where('client_id', $clientId)->first();
-        if ($clientCategory==null) {
+
             $clientCategory = new ClientCategory();
             $clientCategory->pattern=$pattern;
             $clientCategory->template=$template;
@@ -106,6 +104,5 @@ class LearnTag extends AimlTag
             $clientCategory->turn_id=$turnId;
             $clientCategory->tag=strtolower($this->tagName);
             $clientCategory->save();
-        }
     }
 }

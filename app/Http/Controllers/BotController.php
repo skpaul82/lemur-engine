@@ -23,6 +23,7 @@ use App\Models\Turn;
 use App\Models\Wildcard;
 use App\Models\WordSpellingGroup;
 use App\Providers\BotStatsServiceProvider;
+use App\Repositories\BotPropertyRepository;
 use App\Repositories\BotRepository;
 use App\Services\BotStatsService;
 use App\Services\TalkService;
@@ -30,6 +31,7 @@ use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +45,8 @@ class BotController extends AppBaseController
 {
     /** @var  BotRepository */
     private $botRepository;
+    /** @var  BotPropertyRepository */
+    private $botPropertyRepository;
 
     //to help with data testing and form settings
     public $link = 'bots';
@@ -50,9 +54,10 @@ class BotController extends AppBaseController
     public $title = 'Bots';
     public $resourceFolder = 'bots';
 
-    public function __construct(BotRepository $botRepo)
+    public function __construct(BotRepository $botRepo, BotPropertyRepository $botPropertyRepo)
     {
         $this->botRepository = $botRepo;
+        $this->botPropertyRepository = $botPropertyRepo;
     }
 
     /**
@@ -138,9 +143,8 @@ class BotController extends AppBaseController
             DB::beginTransaction();
 
             $bot = $this->botRepository->create($input);
-
-
             $bot = $this->uploadImage($request, $bot);
+            $this->botPropertyRepository->create(['bot_id'=>$bot->id, 'name'=>'name', 'value'=>$input['name']]);
 
             Flash::success('Bot saved successfully.');
             // Commit the transaction
@@ -184,6 +188,8 @@ class BotController extends AppBaseController
 
         $languageList = Language::orderBy('name')->pluck('name', 'slug');
 
+        session(['target_bot' => $bot]);
+
         return view('bots.edit_all')->with(
             ['bot'=> $bot, 'link'=>$this->link,
             'htmlTag'=>$this->htmlTag,
@@ -217,6 +223,8 @@ class BotController extends AppBaseController
         }
 
         $languageList = Language::orderBy('name')->pluck('name', 'slug');
+
+        session(['target_bot' => $bot]);
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot, 'link'=>$this->link,
@@ -334,6 +342,8 @@ class BotController extends AppBaseController
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
+        session(['target_bot' => $bot]);
+
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'botProperties'=> $savedProperties, 'link'=>$link,
             'htmlTag'=>$htmlTag,
@@ -372,6 +382,8 @@ class BotController extends AppBaseController
         $allCategoryGroups = BotCategoryGroup::getAllCategoryGroupsForBot($bot->id);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
+
+        session(['target_bot' => $bot]);
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'categoryGroups'=> $allCategoryGroups,
@@ -442,6 +454,8 @@ class BotController extends AppBaseController
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
+        session(['target_bot' => $bot]);
+
         return view('bots.edit_all')->with(
             ['botList'=>$botList, 'bot'=> $bot,
             'conversations'=> $conversations,
@@ -484,6 +498,8 @@ class BotController extends AppBaseController
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
+        session(['target_bot' => $bot]);
+
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'wordSpellingGroups'=> $allWordSpellingGroups,
             'link'=>$link, 'htmlTag'=>$htmlTag,
@@ -521,6 +537,8 @@ class BotController extends AppBaseController
         $botKeys = BotKey::orderBy('name')->where('bot_id', $bot->id)->get();
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
+
+        session(['target_bot' => $bot]);
 
 
         return view('bots.edit_all')->with(
@@ -569,6 +587,8 @@ class BotController extends AppBaseController
 
 
 
+
+        session(['target_bot' => $bot]);
 
 
 
@@ -628,6 +648,8 @@ class BotController extends AppBaseController
         $resourceFolder = 'bot_widgets';
 
 
+        session(['target_bot' => $bot]);
+
         // get a nice list of word spelling groups
         return view('bots.edit_all')->with(
             ['bot'=> $bot,
@@ -663,6 +685,8 @@ class BotController extends AppBaseController
         $title = 'Bot Chat';
         $resourceFolder = 'bot_chat';
 
+        session(['target_bot' => $bot]);
+
         // get a nice list of word spelling groups
         return view('bots.edit_all')->with(
             ['bot'=> $bot,
@@ -675,6 +699,28 @@ class BotController extends AppBaseController
         );
     }
 
+
+    /**
+     * Display all the properties for this bot in the tab
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function quickChat(Request $request)
+    {
+        $slug = $request->input('q','');
+        $bot = Bot::where('slug',$slug)->where('user_id', Auth::user()->id)->first();
+
+        if (empty($bot)) {
+            Flash::error('Bot not found');
+            return redirect(route('bots.index'));
+        }else{
+            return redirect(url('bot/'.$slug.'/chat'));
+        }
+
+
+
+    }
 
     /**
      * Initiate a talk to the bot...
@@ -699,6 +745,8 @@ class BotController extends AppBaseController
         $htmlTag = 'bot-chat';
         $title = 'Bot Chat';
         $resourceFolder = 'bot_chat';
+
+        session(['target_bot' => $bot]);
 
         try {
             if (!empty($request->input('message'))) {

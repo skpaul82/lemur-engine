@@ -23,7 +23,6 @@ $factory->define(Turn::class, function (Faker $faker) {
         'input' => $faker->word,
         'output' => $faker->text,
         'source' => $faker->randomElement(array_flip(config('lemur_dropdown.turn_source'))),
-        'is_display' => $faker->boolean(),
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
     ];

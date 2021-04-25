@@ -94,7 +94,7 @@ class AimlParser
 
 
 
-        $template = $this->expandSr($template);
+        $template = $this->expandTags($template);
         $template = $this->reduceRandomStack($template);
 
 
@@ -122,10 +122,20 @@ class AimlParser
         }
     }
 
-    public function expandSr($template){
+    public function expandTags($template){
+
+        $oTemplate = $template;
 
         $template = str_replace("<sr/>", "<srai><star /></srai>", $template);
         $template = str_replace("<sr />", "<srai><star /></srai>", $template);
+        $template = str_replace("<person2/>", "<person2><star /></person2>", $template);
+        $template = str_replace("<person2 />", "<person2><star /></person2>", $template);
+        $template = str_replace("<person/>", "<person><star /></person>", $template);
+        $template = str_replace("<person />", "<person><star /></person>", $template);
+
+        if( $oTemplate !== $template){
+            $this->conversation->debug('expanded.template', htmlentities($template));
+        }
 
         return $template;
 
