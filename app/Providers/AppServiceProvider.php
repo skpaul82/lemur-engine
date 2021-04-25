@@ -18,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $environment = config('app.env');
+        //on remote live and dev servers force https
+        if($environment === 'production' || $environment === 'development') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 
     /**
