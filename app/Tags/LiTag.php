@@ -207,10 +207,10 @@ class LiTag extends AimlTag
             $variableField = $conditionObject->getAttribute('VAR', '');
             if ($variableField == '') {
                 $name = $conditionObject->getAttribute('NAME');
-                $currentValue = $this->conversation->getGlobalProperty($name, 'unknown');
+                $currentValue = $this->conversation->getGlobalProperty($name, '');
             } else {
                 $name = $conditionObject->getAttribute('VAR');
-                $currentValue = $this->conversation->getVar($name, 'unknown');
+                $currentValue = $this->conversation->getVar($name, '');
             }
 
 
