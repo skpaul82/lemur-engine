@@ -18,7 +18,9 @@ INSERT INTO `categories` VALUES (26189,1,37,'no-you-are-not','NO YOU ARE NOT','N
     (27082,1,4,'star-response-what-is-your-name','*','%','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
     (27083,1,4,'star-response-what-is-your-name-1','* IS *','% IS %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
     (27084,1,4,'star-response-what-is-your-name-2','* ME *','% IS %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-    (27085,1,4,'star-response-what-is-your-name-3','* CALLED *','% IS %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+    (27085,1,4,'star-response-what-is-your-name-3','* CALLED *','% IS %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+    (27086,1,4,'star-response-what-is-your-name-3','I AM *','I AM %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
+    (27087,1,4,'star-response-what-is-your-name-3','I M *','I M %','%','','','','WHAT IS YOUR NAME','WHAT IS YOUR NAME','W','<srai>MY NAME IS <star index=\"2\"/> </srai>','A',NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
 
 
 ;
