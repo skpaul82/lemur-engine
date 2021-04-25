@@ -60,13 +60,13 @@ class GetTag extends AimlTag
                 $this->buildResponse($contents);
             } elseif ($this->hasAttribute('NAME')) {
                 $name = $this->getAttribute('NAME');
-                $get = $this->conversation->getGlobalProperty($name, 'unknown');
+                $get = $this->conversation->getGlobalProperty($name, '');
 
                 $this->buildResponse($contents);
                 $this->buildResponse($get);
             } elseif ($this->hasAttribute('VAR')) {
                 $name = $this->getAttribute('VAR');
-                $get = $this->conversation->getVar($name, 'unknown');
+                $get = $this->conversation->getVar($name, '');
 
                 $this->buildResponse($contents);
                 $this->buildResponse($get);
