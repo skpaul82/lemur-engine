@@ -6,7 +6,6 @@
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>
 
-
     @if(Auth::user()->id == $user_id || Auth::user()->hasRole('admin'))
 
         <a href="{{ route('categoryGroups.edit', $id) }}"  class='btn btn-success btn-xs edit-button' data-test="edit-button">

@@ -211,6 +211,12 @@ class Turn extends Model
     {
         return $query->where('source', 'srai')->where('status', 'O');
     }
+
+    public static function previousTurn($id)
+    {
+        return Turn::human()->where('id','<',$id)->latest('id')->first();
+    }
+
     /**
      * Get the options for generating the slug.
      */

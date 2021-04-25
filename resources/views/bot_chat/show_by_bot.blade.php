@@ -10,7 +10,7 @@
 
 
 
-        <form action="/bot/{!! $bot->slug !!}/chat" method="POST" id="chat-form">
+
 
         <div class="row">
 
@@ -74,13 +74,14 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
+                        <form action="/bot/{!! $bot->slug !!}/chat" method="POST" id="chat-form">
                         @csrf
 
                         @if(!empty($response) && !empty($response['client']['id']))
 
                             {{ Form::hidden('client', $response['client']['id']) }}
                         @else
-                            {{ Form::hidden('client', MD5(Auth::user()->id)) }}
+                            {{ Form::hidden('client', MD5(Auth::user()->api_token)) }}
                         @endif
 
                             <div class="input-group">
@@ -92,6 +93,7 @@
                                     <button type="submit" class="btn btn-primary btn-flat">Send</button>
                                 </span>
                             </div>
+                        </form>
                     </div>
                     <!-- /.box-footer-->
                 </div>
@@ -240,7 +242,7 @@
                 <!-- /.widget-user -->
             </div>
         </div>
-        </form>
+
     </div>
     <!-- /.content -->
 </section>

@@ -2,9 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Category Group
-        </h1>
+        <h1 class="pull-left">Category Groups</h1>
+        <div class="clearfix"></div>
     </section>
     <div class="content">
         @include('layouts.errors')

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Category
+            Create New Category From Empty Response
         </h1>
     </section>
     <div class="content">

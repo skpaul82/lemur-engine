@@ -13,6 +13,7 @@ use App\Models\BotProperty;
 use App\Models\CategoryGroup;
 use App\Models\ClientCategory;
 use App\Models\EmptyResponse;
+use App\Models\Turn;
 use App\Repositories\CategoryRepository;
 use App\Services\AimlUploadService;
 use Exception;
@@ -89,6 +90,35 @@ class CategoryController extends AppBaseController
      * @return Response
      * @throws AuthorizationException
      */
+    public function createFromTurn($id)
+    {
+        $this->authorize('create', Category::class);
+
+        $turn = Turn::find($id);
+        $previousTurn = Turn::PreviousTurn($id);
+
+        $categoryGroupList = CategoryGroup::myEditableItems()->orderBy('name')->pluck('name', 'slug');
+
+        if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
+            $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+        }
+
+
+        return view('categories.create_from_turn')->with(
+            ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
+                'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
+                'categoryGroupList'=>$categoryGroupList,
+                'redirect_url'=>url()->previous(),
+                'turn'=>$turn,
+                'previousTurn'=>$previousTurn]
+        );
+    }
+    /**
+     * Show the form for creating a new Category.
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
     public function createFromEmptyResponse($id)
     {
         $this->authorize('create', Category::class);
@@ -96,6 +126,10 @@ class CategoryController extends AppBaseController
         $emptyResponse = EmptyResponse::find($id);
 
         $categoryGroupList = CategoryGroup::myEditableItems()->orderBy('name')->pluck('name', 'slug');
+
+        if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
+            $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+        }
 
         return view('categories.create_from_empty_response')->with(
             ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
@@ -119,6 +153,10 @@ class CategoryController extends AppBaseController
 
         $categoryGroupList = CategoryGroup::myEditableItems()->orderBy('name')->pluck('name', 'slug');
 
+        if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
+            $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+        }
+
         return view('categories.create_from_client_category')->with(
             ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
             'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
@@ -127,7 +165,31 @@ class CategoryController extends AppBaseController
         );
     }
 
+    /**
+     * Show the form for creating a new Category.
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function createFromCopy($id)
+    {
+        $this->authorize('create', Category::class);
 
+        $category = Category::find($id);
+
+        $categoryGroupList = CategoryGroup::myEditableItems()->orderBy('name')->pluck('name', 'slug');
+
+        if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
+            $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+        }
+
+        return view('categories.create_from_copy')->with(
+            ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
+                'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
+                'categoryGroupList'=>$categoryGroupList,
+                'category'=>$category]
+        );
+    }
     /**
      * Store a newly created Category in storage.
      *

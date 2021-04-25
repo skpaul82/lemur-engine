@@ -4,8 +4,9 @@
     <section class="content-header">
         <h1 class="pull-left">Sets</h1>
         <h1 class="pull-right">
-           <a class="btn btn-sm btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('sets.create') }}">Add New</a>
+           <a class="btn btn-sm btn-primary pull-right" style="margin-top: -5px;margin-bottom: 0px" href="{{ route('sets.create') }}">Add New</a>
         </h1>
+        <div class="clearfix"></div>
     </section>
     <div class="content">
         <div class="clearfix"></div>

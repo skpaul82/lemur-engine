@@ -830,3 +830,29 @@ textarea.form-control-span {
     height: 100px;
     border: 3px solid #d2d6de;
 }
+
+.link-button {
+    border: none;
+    padding: 0!important;
+    text-decoration: none;
+    cursor: pointer;
+    color: #3c8dbc;
+    background-color:transparent;
+}
+
+.link-button:hover, .link-button:active, .link-button:focus {
+    outline: none;
+    text-decoration: none;
+    color: #72afd2;
+}
+
+
+#log-actions {
+    display:inline-flex;
+    list-style-position: inside;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+#log-actions li{
+    display: inline;
+}
