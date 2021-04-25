@@ -96,6 +96,25 @@ Route::group(['prefix' => '/category/fromEmptyResponse'], function () {
 });
 
 
+/** ---------------------------------------------------------------
+ *  Create category from a turn
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/category/fromTurn'], function () {
+
+    Route::bind('turnSlug', function ($turnSlug) {
+        try {
+            $turn = App\Models\Turn::where('slug', $turnSlug)->firstOrFail();
+            return $turn->id;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+
+    Route::GET('/{turnSlug}', 'CategoryController@createFromTurn')
+        ->middleware(['auth:web','data.transform']);
+});
+
 Route::group(['prefix' => '/category/fromClientCategory'], function () {
 
     Route::bind('clientCategorySlug', function ($clientCategorySlug) {
@@ -112,6 +131,21 @@ Route::group(['prefix' => '/category/fromClientCategory'], function () {
         ->middleware(['auth:web','data.transform']);
 });
 
+Route::group(['prefix' => '/category/fromCopy'], function () {
+
+    Route::bind('categorySlug', function ($categorySlug) {
+
+        try {
+            $category = App\Models\Category::where('slug', $categorySlug)->firstOrFail();
+            return $category->id;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::GET('/{categorySlug}', 'CategoryController@createFromCopy')
+        ->middleware(['auth:web','data.transform']);
+});
 
 Route::resource('categories', 'CategoryController')
     ->middleware(['auth:web','data.transform']);

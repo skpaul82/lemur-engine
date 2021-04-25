@@ -111,7 +111,7 @@
 <!-- Status Field -->
 <div class="form-group col-sm-3 select2" data-test="status_div">
     {!! Form::label('status', 'Status:', ['data-test'=>"status_label"]) !!}
-    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [ 'disabled'=>$readonly, 'readonly'=>$readonly,  'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Turn::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
+    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [ 'disabled'=>$readonly, 'readonly'=>$readonly,  'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Bot::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
 </div>
 
 

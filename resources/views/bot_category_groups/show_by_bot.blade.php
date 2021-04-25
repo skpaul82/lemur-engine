@@ -68,13 +68,19 @@
                                             <div class="input-group-btn">
                                                 <a data-title="{!! ucwords($categoryGroup->name) !!}" data-description="{!! $categoryGroup->description !!}" id='{!! $categoryGroup->category_group_id !!}_info_button' data-test='{!! $categoryGroup->category_group_id !!}_info_button' class='btn btn-info open-info-button'><i class='fa fa-info-circle'></i></a>
 
-                                                @if(Auth::user()->id === $categoryGroup->user_id || Auth::user()->hasRole('admin'))
+
+                                                <a href="{!! url('categories?col=1&q='.$categoryGroup->category_group_id) !!}"class="btn btn-warning show-button" data-test="show-button-0">
+                                                    <i class="fa fa-tree"></i>
+                                                </a>
+
+
+                                            @if(Auth::user()->id === $categoryGroup->user_id || Auth::user()->hasRole('admin'))
 
                                                 <a href="{!! url('categoryGroups/'.$categoryGroup->category_group_id.'/edit') !!}" id='{!! $categoryGroup->category_group_id !!}_edit_button' data-test='{!! $categoryGroup->category_group_id !!}_edit_button' class='btn btn-success edit-button'><i class='fa fa-edit'></i></a>
 
                                                 @endif
 
-                                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fa fa-download'></i>
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fa fa-download'></i>
                                                     <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="{!! url('/categories/'.$categoryGroup->category_group_id.'/download/csv') !!}" type='link' id='{!! $categoryGroup->category_group_id !!}_download_csv_button' data-test='{!! $categoryGroup->category_group_id !!}_download_csv_button'>CVS</a></li>

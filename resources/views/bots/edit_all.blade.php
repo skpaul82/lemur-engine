@@ -14,16 +14,16 @@
 
                 @if($htmlTag==='bot-keys' || $htmlTag==='bot-properties' || $htmlTag==='bots'|| $htmlTag==='bot-category-groups' || $htmlTag==='bots-readonly' )
                      @if($htmlTag=='bot-properties')
-                        <button class="btn-sm btn btn-success" id="openAddModal" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</button>
-                        <a class="btn-sm btn btn-success" href="{!! url("/botPropertiesUpload") !!}" data-test="{!! $htmlTag !!}-upload-button"><i class="fa fa-upload"></i> Upload</a>
-                        <a class="btn-sm btn btn-success" href="{!! url("/bot/properties/".$bot->slug."/download") !!}" data-test="{!! $htmlTag !!}-download-button"><i class="fa fa-download"></i> Download</a>
+                        <button class="btn-sm btn btn-primary" id="openAddModal" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</button>
+                        <a class="btn-sm btn btn-primary" href="{!! url("/botPropertiesUpload") !!}" data-test="{!! $htmlTag !!}-upload-button"><i class="fa fa-upload"></i> Upload</a>
+                        <a class="btn-sm btn btn-primary" href="{!! url("/bot/properties/".$bot->slug."/download") !!}" data-test="{!! $htmlTag !!}-download-button"><i class="fa fa-download"></i> Download</a>
                     @elseif($htmlTag=='bot-category-groups')
-                        <a class="btn-sm btn btn-success" href="{!! url("/categories/create") !!}" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</a>
-                        <a class="btn-sm btn btn-success" href="{!! url("/categoriesUpload") !!}" data-test="{!! $htmlTag !!}-upload-button"><i class="fa fa-upload"></i> Upload Categories</a>
+                        <a class="btn-sm btn btn-primary" href="{!! url("/categories/create") !!}" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</a>
+                        <a class="btn-sm btn btn-primary" href="{!! url("/categoriesUpload") !!}" data-test="{!! $htmlTag !!}-upload-button"><i class="fa fa-upload"></i> Upload Categories</a>
                     @elseif($htmlTag=='bots-readonly'||$htmlTag=='bots')
-                        <a class="btn-sm btn btn-success" href="{!! url("/bots/create") !!}" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</a>
+                        <a class="btn-sm btn btn-primary" href="{!! url("/bots/create") !!}" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</a>
                     @else
-                        <button class="btn-sm btn btn-success" id="openAddModal" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</button>
+                        <button class="btn-sm btn btn-primary" id="openAddModal" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</button>
                     @endif
 
                     @if($htmlTag=='bots-readonly')

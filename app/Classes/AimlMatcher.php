@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Models\BotCategoryGroup;
 use App\Models\Category;
 use App\Models\ClientCategory;
 use App\Models\Conversation;
@@ -444,6 +445,22 @@ class AimlMatcher
     }
 
 
+    public function getListOfAllowedCategoryGroups(){
+
+        //the bot has a user id
+        $botId = $this->bot->id;
+        $botAuthorId = $this->bot->user_id;
+
+        return BotCategoryGroup::join('category_groups', 'category_groups.id','=','bot_category_groups.category_group_id')
+            ->where('bot_id',$botId)
+            ->where('category_groups.status', 'A')
+            ->where(function ($query)  use($botAuthorId) {
+                //it has to be owned by the bot author or be a master record
+                $query->where('category_groups.user_id',$botAuthorId)
+                    ->orWhere('category_groups.is_master', 1);
+            })->pluck('category_groups.id')->toArray();
+
+    }
 
     /**
      * match the pattern
@@ -456,6 +473,8 @@ class AimlMatcher
     public function match($preparedSentence)
     {
 
+
+        $allowedCategoryGroupIds = $this->getListOfAllowedCategoryGroups();
 
 
         $botId = $this->bot->id;
@@ -493,15 +512,13 @@ class AimlMatcher
             'categories.that',
             'categories.regexp_that',
             'categories.first_letter_that',
-            'categories.template'
+            'categories.template',
+            'category_groups.name',
+            'category_groups.slug'
         )
+            ->whereIn('category_group_id', $allowedCategoryGroupIds)
             ->join('category_groups', 'category_groups.id', '=', 'categories.category_group_id')
-            ->join('bot_category_groups', function ($join) use ($botId) {
-                $join->on('category_groups.id', '=', 'bot_category_groups.category_group_id')
-                    ->where('bot_category_groups.bot_id', $botId);
-            })
-            ->where('categories.status', 'A')
-            ->where('category_groups.status', 'A');
+            ->where('categories.status', 'A');
 
 
 

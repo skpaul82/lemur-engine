@@ -29,7 +29,7 @@
 
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $wordSpellingGroup->name !!}_div'>
-                                    <label for='{!! $wordSpellingGroup->name !!}_field' data-test='{!! $wordSpellingGroup->name !!}_label'>Spellcheckher - {!! $wordSpellingGroup->name !!} categories:</label>
+                                    <label for='{!! $wordSpellingGroup->name !!}_field' data-test='{!! $wordSpellingGroup->name !!}_label'>Spellchecher - {!! $wordSpellingGroup->name !!} categories:</label>
                                     <div class='input-group'>
                                         <span class='input-group-addon'>
 
@@ -50,7 +50,7 @@
 
                                             <a data-title="{!! ucwords($wordSpellingGroup->name) !!}" data-description="{!! $wordSpellingGroup->description !!}" id='{!! $wordSpellingGroup->word_spelling_group_slug !!}_info_button' data-test='{!! $wordSpellingGroup->word_spelling_group_slug !!}_info_button' class='btn btn-info open-info-button'><i class='fa fa-info-circle'></i></a>
                                             <a href="{!! url('wordSpellingGroups/'.$wordSpellingGroup->word_spelling_group_slug.'/edit') !!}" id='{!! $wordSpellingGroup->word_spelling_group_slug !!}_edit_button' data-test='{!! $wordSpellingGroup->word_spelling_group_slug !!}_edit_button' class='btn btn-success edit-button'><i class='fa fa-edit'></i></a>
-                                            <a href="{!! url('wordSpellingDownload/'.$wordSpellingGroup->word_spelling_group_slug) !!}" type='link' id='{!! $wordSpellingGroup->word_spelling_group_slug !!}_download_button' data-test='{!! $wordSpellingGroup->word_spelling_group_slug !!}_download_button' class='btn btn-warning download-button'><i class='fa fa-download'></i></a>
+                                            <a href="{!! url('wordSpellingDownload/'.$wordSpellingGroup->word_spelling_group_slug) !!}" type='link' id='{!! $wordSpellingGroup->word_spelling_group_slug !!}_download_button' data-test='{!! $wordSpellingGroup->word_spelling_group_slug !!}_download_button' class='btn btn-primary download-button'><i class='fa fa-download'></i></a>
                                         </div>
                                     </div>
                                 </div>

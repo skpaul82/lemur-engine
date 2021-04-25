@@ -13,7 +13,7 @@
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="pattern_div">
     {!! Form::label('pattern', 'Pattern:', ['data-test'=>"pattern_label"]) !!}
-    {!! Form::text('pattern', $emptyResponse->input, ['class' => 'form-control', App\Models\Category::getFormValidation('pattern'),'id'=>"pattern_field", 'data-test'=>"pattern_field"] ) !!}
+    {!! Form::text('pattern', $category->pattern, ['class' => 'form-control', App\Models\Category::getFormValidation('pattern'),'id'=>"pattern_field", 'data-test'=>"pattern_field"] ) !!}
     <small class="help-block" data-test="help-block-pattern-field">
         <span>You do not need to add the enclosing &lt;pattern>&lt;/pattern> tags.<br/>All fields will be normalized when you save.</span>
     </small>
@@ -23,16 +23,41 @@
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="topic_div">
     {!! Form::label('topic', 'Topic:', ['data-test'=>"topic_label"]) !!}
-    {!! Form::text('topic', null, ['class' => 'form-control', App\Models\Category::getFormValidation('topic'),'id'=>"topic_field", 'data-test'=>"topic_field"] ) !!}
-</div>
+
+    @if(!empty($category->topic))
+        <div class="input-group">
+            {!! Form::text('topic', $category->topic, ['class' => 'form-control', App\Models\Category::getFormValidation('topic'),'id'=>"topic_field", 'data-test'=>"topic_field"] ) !!}
+
+            <div class="input-group-btn">
+                <span name='clear' id='clear-button' data-field="topic_field" data-test='clear-button' class='btn btn-warning clear-button'><i class='fa fa-remove'></i> clear</span>
+            </div>
+        </div>
+    @else
+        {!! Form::text('topic', null, ['class' => 'form-control', App\Models\Category::getFormValidation('topic'),'id'=>"topic_field", 'data-test'=>"topic_field"] ) !!}
+
+    @endif
+
+  </div>
 
 <div class="clearfix"></div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="that_div">
     {!! Form::label('that', 'That:', ['data-test'=>"that_label"]) !!}
-    {!! Form::text('that', null, ['class' => 'form-control', App\Models\Category::getFormValidation('that'),'id'=>"that_field", 'data-test'=>"that_field"] ) !!}
+
+    @if(!empty($category->that))
+        <div class="input-group">
+            {!! Form::text('that', $category->that, ['class' => 'form-control', App\Models\Category::getFormValidation('that'),'id'=>"that_field", 'data-test'=>"that_field"] ) !!}
+            <div class="input-group-btn">
+                <span name='clear' id='clear-button' data-field="that_field" data-test='clear-button' class='btn btn-warning clear-button'><i class='fa fa-remove'></i> clear</span>
+            </div>
+        </div>
+    @else
+        {!! Form::text('that', null, ['class' => 'form-control', App\Models\Category::getFormValidation('that'),'id'=>"that_field", 'data-test'=>"that_field"] ) !!}
+
+    @endif
+
     <small class="help-block" data-test="help-block-that-field">
-        <span>You do not need to add the enclosing &lt;that>&lt;/that> tags.<br/>All fields will be normalized when you save.</span>
+        <span>You do not need to add the enclosing &lt;that>&lt;/that> tags.</span>
     </small>
 </div>
 
@@ -41,9 +66,9 @@
 <!-- Template Field -->
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="template_div">
     {!! Form::label('template', 'Template:', ['data-test'=>"template_label"]) !!}
-    {!! Form::textarea('template', null, ['rows' => 10, 'class' => 'form-control', 'id'=>"template_field", 'data-test'=>"template_field", App\Models\Category::getFormValidation('template')] ) !!}
+    {!! Form::textarea('template', $category->template, ['rows' => 10, 'class' => 'form-control', 'id'=>"template_field", 'data-test'=>"template_field", App\Models\Category::getFormValidation('template')] ) !!}
     <small class="help-block" data-test="help-block-template-field">
-        <span>You do not need to add the enclosing &lt;template>&lt;/template> tags.</span>
+        <span>You do not need to add the enclosing &lt;template>&lt;/template> tags.<br/>All fields will be normalized when you save.</span>
     </small>
 </div>
 
@@ -54,21 +79,10 @@
     {!! Form::label('status', 'Status:', ['data-test'=>"status_label"]) !!}
     {!! Form::select('status', config('lemur_dropdown.item_status'), null, [  'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Category::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
 </div>
-    <div class="clearfix"></div>
-    <!-- 'Boolean delete_original' checked by default -->
-    <div class="form-group col-sm-6" data-test="delete_original_div_div">
-        {!! Form::label('delete_original', 'Delete Empty Response:', ['data-test'=>"delete_original_label"]) !!}
-        <div class="input-group" data-test="delete_original_div_group">
-        <span class="input-group-addon">
-            {!! Form::hidden('delete_original', 0) !!}
-            {{ Form::checkbox('delete_original', '1', true, ['id'=>"delete_original_field", 'data-test'=>"delete_original_field"])  }}
-         </span>
-            <input type="text" class="form-control" aria-label="..." value="Delete the original empty response on category creation?">
-        </div><!-- /.col-lg-6 -->
-    </div>
+
 
 <div class="clearfix"></div>
 
-{!! Form::hidden('empty_response_id', $emptyResponse->slug) !!}
-{!! Form::hidden('redirect_url', url('/emptyResponses')) !!}
+
+{!! Form::hidden('redirect_url', url('/categories')) !!}
 

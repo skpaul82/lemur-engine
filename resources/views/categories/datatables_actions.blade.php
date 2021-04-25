@@ -2,7 +2,9 @@
     <a href="{{ route('categories.show', $id) }}" class='btn btn-info btn-xs show-button' data-test="show-button">
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>
-
+    <a href="{{ url('/category/fromCopy/'.$id) }}" class='btn btn-primary btn-xs show-button' data-test="show-button">
+        <i class="fa fa-plus"></i>
+    </a>
     @if(Auth::user()->id == $user_id || Auth::user()->hasRole('admin'))
 
         <a href="{{ route('categories.edit', $id) }}"  class='btn btn-success btn-xs edit-button' data-test="edit-button">

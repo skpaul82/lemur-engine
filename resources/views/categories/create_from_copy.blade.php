@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Create New Category From Client Category
+            Create New Category From A Copy
         </h1>
     </section>
     <div class="content">
@@ -14,12 +14,12 @@
                     <div class="col-md-12">
                     {!! Form::open(['route' => 'categories.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
 
-                        @include('categories.fields_from_client_categories')
+                        @include('categories.fields_from_copy')
 
                         <!-- Submit Field -->
                         <div class="form-group col-sm-12">
                             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                            <a href="{{ route('clientCategories.index') }}" class="btn btn-default">Cancel</a>
+                            <a href="{{ route('categories.index') }}" class="btn btn-default">Cancel</a>
                         </div>
 
 
@@ -32,6 +32,6 @@
 @endsection
 @push('scripts')
     {{ Html::script('js/validation.js') }}
-    {{ Html::script('js/unlock.js') }}
+    {{ Html::script('js/clear.js') }}
     {{ Html::script('js/select2.js') }}
 @endpush
