@@ -47,6 +47,7 @@ tests/resources/*
 !.elasticbeanstalk/*.global.yml
 deploy.md
 deploy.sh
+deploy_master.sh
 .deploy_version
 .ebignore
 .platform/*
