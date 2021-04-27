@@ -75,7 +75,7 @@ class SraiTag extends AimlTag
                     ]
                 );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         //check if we have reached the max levels of srai recursion
         //if so through an exception

@@ -29,7 +29,7 @@
 
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $wordSpellingGroup->name !!}_div'>
-                                    <label for='{!! $wordSpellingGroup->name !!}_field' data-test='{!! $wordSpellingGroup->name !!}_label'>Spellchecher - {!! $wordSpellingGroup->name !!} categories:</label>
+                                    <label for='{!! $wordSpellingGroup->name !!}_field' data-test='{!! $wordSpellingGroup->name !!}_label'>Spellchecher - {!! $wordSpellingGroup->name !!}:</label>
                                     <div class='input-group'>
                                         <span class='input-group-addon'>
 

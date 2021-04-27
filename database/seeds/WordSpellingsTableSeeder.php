@@ -17,6 +17,7 @@ class WordSpellingsTableSeeder extends Seeder
     public function run()
     {
         DB::unprepared(file_get_contents('database/seeds/sql/word_spellings.sql'));
+        DB::unprepared(file_get_contents('database/seeds/sql/word_spellings_text_talk.sql'));
 
     }
 }

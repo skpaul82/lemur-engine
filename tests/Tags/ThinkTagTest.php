@@ -48,7 +48,7 @@ class ThinkTagTest extends TagTestCase
     {
 
         $this->tag->closeTag();
-        $this->assertEmpty($this->tag->getCurrentResponse());
+        $this->assertEmpty($this->tag->getCurrentTagContents());
     }
 
 

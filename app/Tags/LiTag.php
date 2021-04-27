@@ -110,7 +110,7 @@ class LiTag extends AimlTag
         $parentObjectIndex = $parentObjectArr['position'];
         $parentTagName = $parentObject->getTagName();
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         $isLoop = false;
         if ($parentObject->checkAttribute('TYPE', 'LOOP')) {

@@ -58,7 +58,7 @@ class HtmlTagTest extends TagTestCase
         $this->tag->setTagName('br');
         $this->tag->setTagType('single');
         $this->tag->processContents('hello');
-        $this->assertEquals("hello<br/>", $this->tag->getCurrentResponse());
+        $this->assertEquals("hello<br/>", $this->tag->getCurrentTagContents());
     }
 
 
@@ -73,7 +73,7 @@ class HtmlTagTest extends TagTestCase
         $this->tag->setTagName('br');
         $this->tag->setTagType('single');
         $this->tag->processContents('hello');
-        $this->assertEquals("hello", $this->tag->getCurrentResponse());
+        $this->assertEquals("hello", $this->tag->getCurrentTagContents());
     }
 
 
@@ -88,7 +88,7 @@ class HtmlTagTest extends TagTestCase
         $this->tag->setTagName('strong');
         $this->tag->setTagType('wrapped');
         $this->tag->processContents('hello');
-        $this->assertEquals("<strong>hello</strong>", $this->tag->getCurrentResponse());
+        $this->assertEquals("<strong>hello</strong>", $this->tag->getCurrentTagContents());
     }
 
 
@@ -103,7 +103,7 @@ class HtmlTagTest extends TagTestCase
         $this->tag->setTagName('strong');
         $this->tag->setTagType('wrapped');
         $this->tag->processContents('hello');
-        $this->assertEquals("hello", $this->tag->getCurrentResponse());
+        $this->assertEquals("hello", $this->tag->getCurrentTagContents());
     }
 
     /**

@@ -105,8 +105,4 @@ To run the tests on the VM type
 
 ### Development
 
-(more to come)..    
-To check the code against the coding standards
-
-    cd /vagrant
-    php artisan test --testsuite=All 
+If you would like to contribute to this project please read the guidelines set out in CONTRIBUTING.md

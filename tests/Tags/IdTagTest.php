@@ -60,7 +60,7 @@ class IdTagTest extends TagTestCase
     public function testCloseTag()
     {
         $this->tag->closeTag();
-        $this->assertEquals('test-123', $this->tag->getCurrentResponse());
+        $this->assertEquals('test-123', $this->tag->getCurrentTagContents());
     }
 
 

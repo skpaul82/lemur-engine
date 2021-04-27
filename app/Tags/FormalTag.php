@@ -51,7 +51,7 @@ class FormalTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $tagContents = mb_convert_case($contents, MB_CASE_TITLE, "UTF-8");
         $this->buildResponse($tagContents);
     }

@@ -50,7 +50,7 @@ class ThinkTag extends AimlTag
 
         $this->buildResponse(' ');
 
-        return $this->getCurrentResponse(true);
+        return $this->getCurrentTagContents(true);
     }
 
     public function closeTag()

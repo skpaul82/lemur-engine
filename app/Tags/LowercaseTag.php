@@ -50,7 +50,7 @@ class LowercaseTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $tagContents=mb_strtolower($contents);
         $this->buildResponse($tagContents);
     }

@@ -62,7 +62,7 @@ class SizeTagTest extends TagTestCase
 
         $total = Category::all()->count();
 
-        $this->assertEquals($total, $this->tag->getCurrentResponse());
+        $this->assertEquals($total, $this->tag->getCurrentTagContents());
     }
 
 

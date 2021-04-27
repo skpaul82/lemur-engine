@@ -56,7 +56,7 @@ class GenderTag extends AimlTag
 
         $preg = $this->getTransformations();
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $words = explode(" ", $contents);
 
         if (empty($preg)) {

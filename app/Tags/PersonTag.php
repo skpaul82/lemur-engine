@@ -58,7 +58,7 @@ class PersonTag extends AimlTag
                     ]
                 );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $words = explode(" ", $contents);
         $preg = $this->getTransformations($words);
         if (empty($preg)) {

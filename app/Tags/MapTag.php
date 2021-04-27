@@ -51,7 +51,7 @@ class MapTag extends AimlTag
         );
 
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $mapName = $this->getAttribute('NAME');
 
 
