@@ -24,13 +24,13 @@ class TemplateTag extends AimlTag
         if ($this->isInLearningMode()) {
             //if we are in learning mode we will do something else instead of evaluating the contents
             //it will turn it back into aiml for saving...
-            $contents = $this->getCurrentResponse(true);
+            $contents = $this->getCurrentTagContents(true);
             $contents = $this->buildAIMLIfInLearnMode($contents);
 
             $this->buildResponse($contents);
         } else {
             //if not this is the last tag ... just send the contents
-            $contents = $this->getCurrentResponse(true);
+            $contents = $this->getCurrentTagContents(true);
           //  $this->buildResponse($contents);
 
 

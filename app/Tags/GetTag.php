@@ -50,7 +50,7 @@ class GetTag extends AimlTag
                     ]
                 );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         if ($this->hasAttributes()) {
             if ($this->isInLiTag()) {

@@ -5,8 +5,7 @@
             const wdg = document.createElement("div");
             wdg.classList.add("chat-avatar-inner");
             wdg.innerHTML = `<!-- bot popup window -->
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="main-box clearfix">
+                <div class="lemur-main-box clearfix">
                    
 
                     <div id="animated-bot-avatar-default" class="profile-img img-responsive center-block"></div>
@@ -17,32 +16,29 @@
                     <div id="animated-bot-avatar-waiting-2" class="talking-head profile-img img-responsive center-block" style="display:none"></div>
 
 
-                    <div class="tab-pane fade in active" id="tab-chat">
-                        <div class="conversation-wrapper">
-                            <div class="conversation-content">
-                                <div class="slimScrollDiv chat-window" id="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 240px;">
-                                    <div class="conversation-inner" id="conversation-inner" style=" width: auto; height: 240px;">
+                        <div class="lemur-conversation-wrapper">
+                            <div class="lemur-conversation-content">
+                                <div class="slimScrollDiv chat-window" id="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 210px;">
+                                    <div class="lemur-conversation-inner" id="lemur-conversation-inner" style=" height: 210px;">
                                     </div>
                                 </div>
                             </div>
-                            <div class="conversation-new-message">
+                            <div class="lemur-conversation-new-message">
                                 <form id="chat-form">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text" id="message" name="message" class="form-control" rows="2" placeholder="Enter your message...">
-                                            <span class="input-group-btn">
-                                                        <button type="submit" id="send-chat" class="btn btn-success pull-right">Send message</button>
-                                                    </span>
-                                        </div>
-                                    </div>
-
+                                
+                                <div class="input-group input-group-sm"">
+                                  <input type="text" id="message" name="message" class="form-control" rows="2" placeholder="say...">
+                                  <div class="input-group-append input-group-btn">
+                                    <button type="submit" id="send-chat" class="btn btn-success" type="button">Send</button>
+                                  </div>
+                                </div>
+                                
+                                   
 
                                 </form>
                             </div>
-                        </div>
                     </div>
                 </div>
-            </div>
         <!--/bot chat window -->`;
             // Load your chat data into UI
             return wdg;
@@ -145,7 +141,7 @@
             ele.dataset.host = '';
         }
 
-        $("#conversation-inner").generateUserMessage(msg, ele.dataset.clientimage,'user');
+        $("#lemur-conversation-inner").generateUserMessage(msg, ele.dataset.clientimage,'user');
 
         $("#message").val('');
 
@@ -178,7 +174,7 @@
                 setTimeout(function(){
 
                     console.log('success',response.data.conversation.output,response.data.bot.image)
-                    $("#conversation-inner").generateBotMessage(response.data.conversation.output,response.data.bot.image,response.data.bot.name);
+                    $("#lemur-conversation-inner").generateBotMessage(response.data.conversation.output,response.data.bot.image,response.data.bot.name);
                     talkAll();
                 }, 250);
             },
@@ -249,42 +245,41 @@ $( document ).ready(function() {
 
         $.fn.generateBotMessage = function(msg, image, name){
             let str = "" +
-                "<div class='conversation-item item-left clearfix'> " +
-                "<div class='conversation-user'> " +
-                "<img src='"+image+"' class='img-responsive'  alt=''> " +
+                "<div class='lemur-conversation-item item-left clearfix'> " +
+                "<div class='lemur-conversation-user'> " +
+                "<img src='"+image+"' class='lemur-conversation-bot-avatar'  alt=''> " +
                 "</div> " +
-                "<div class='conversation-body'> " +
-                "<div class='name'>" +
+                "<div class='lemur-conversation-body'> " +
+                "<div class='lemur-name'>" +
                 name +
                 "</div> " +
-                "<div class='time hidden-xs'>" +
-                new Date().toUTCString() +
+                "<div class='lemur-time hidden-xs'>" +
+                new Date().toLocaleString() +
                 "</div> " +
-                "<div class='text'>" +
+                "<div class='lemur-text'>" +
                 msg +
                 "</div> " +
                 "</div> " +
                 "</div>"
             $(this).append(str);
             $("#slimScrollDiv").stop().animate({ scrollTop: $("#slimScrollDiv")[0].scrollHeight}, 1000);
-
         }
 
 
         $.fn.generateUserMessage = function(msg, image) {
             let str="";
-            str += "<div class='conversation-item item-right clearfix'>";
-            str += "<div class='conversation-user'>"
-            str += "<img src='"+image+"' class='img-responsive'  alt=''>"
+            str += "<div class='lemur-conversation-item item-right clearfix'>";
+            str += "<div class='lemur-conversation-user'>"
+            str += "<img src='"+image+"' class='lemur-conversation-user-avatar'  alt=''>"
             str += "</div>"
-            str += "<div class='conversation-body'> " +
-                "<div class='name'>" +
+            str += "<div class='lemur-conversation-body'> " +
+                "<div class='lemur-name'>" +
                 "You " +
                 "</div> " +
-                "<div class='time hidden-xs'>" +
-                new Date().toUTCString() +
+                "<div class='lemur-time hidden-xs'>" +
+                new Date().toLocaleString() +
                 "</div> " +
-                "<div class='text'>" +
+                "<div class='lemur-text'>" +
                 msg +
                 "</div> " +
                 "</div> " +

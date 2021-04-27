@@ -644,7 +644,7 @@ XML;
     }
 
 
-    public function getCurrentResponse($clear = true)
+    public function getCurrentTagContents($clear = true)
     {
 
         $contents = LemurStr::cleanAndImplode($this->tagContents);
@@ -653,7 +653,7 @@ XML;
         }
 
         LemurLog::info(
-            'getCurrentResponse',
+            'getCurrentTagContents',
             [
                 'conversation_id'=>$this->conversation->id,
                 'turn_id'=>$this->conversation->currentTurnId(),

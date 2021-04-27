@@ -10,12 +10,14 @@ use App\Factories\ConversationFactory;
 use App\Factories\TurnFactory;
 use App\Models\Bot;
 use App\Models\BotKey;
+use App\Models\BotWordSpellingGroup;
 use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\Turn;
 use App\Classes\AimlParser;
 use App\Models\Normalization;
 use App\Models\Wildcard;
+use App\Models\WordSpelling;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -372,9 +374,13 @@ class TalkService
      */
     public function process($sentence)
     {
+        $preparedSentence = $sentence;
 
-        $preparedSentence = LemurStr::normalize($sentence);
+        $preparedSentence = $this->applyPrePlugins($preparedSentence);
+        $preparedSentence = LemurStr::normalizeInput($preparedSentence);
         $this->checkAndSetNormalizations($preparedSentence, $sentence);
+
+
 
         //initially we will check to see if there is 'learnt' response from the same client...
         if ($output =$this->aimlMatcher->matchClientCategory($preparedSentence)) {
@@ -497,5 +503,51 @@ class TalkService
         }
 
         return ['res'=>$res,'debugArr'=>$debugArr];
+    }
+
+    public function applyPrePlugins($str){
+
+        return $this->applySpellingCorrections($str);
+
+    }
+
+    public function applySpellingCorrections($str){
+
+        $botWordSpellingGroupIds = BotWordSpellingGroup::where('bot_id', $this->bot->id)->pluck('id','id');
+
+        if(count($botWordSpellingGroupIds)==0){
+
+            return $str;
+        }
+
+        $allWords = $words = explode(" ",$str);
+
+        $countWords = count($words);
+        for($i=0; $i<=$countWords; $i++){
+            $j=$i+1;
+            $k=$i+2;
+            if(isset($words[$j])){
+                $allWords[] = $words[$i].' '.$words[$j];
+            }
+            if(isset($words[$j]) && isset($words[$k])){
+                $allWords[] = $words[$i].' '.$words[$j].' '.$words[$k];
+            }
+        }
+
+        $wordSpellings = WordSpelling::whereIn('word_spelling_group_id',$botWordSpellingGroupIds)->whereIn('word',$allWords)->pluck( 'replacement','word');
+
+        if(count($wordSpellings)==0){
+
+            return $str;
+        }
+
+
+        foreach($wordSpellings as $replacement => $word){
+            $str = preg_replace("~\b$replacement\b~is",$word,$str);
+        }
+
+
+
+        return $str;
     }
 }

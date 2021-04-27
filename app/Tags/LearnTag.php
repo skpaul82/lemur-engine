@@ -77,7 +77,7 @@ class LearnTag extends AimlTag
                 );
 
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
 
         if(trim($contents)==''){

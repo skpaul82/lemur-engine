@@ -57,3 +57,8 @@ static.conf
 https.conf
 
 composer.lock
+
+# But not these files...
+app/Tags/Custom/*
+!app/Tags/Custom/GooglesearchTag.php
+!app/Tags/Custom/HelloworldTag.php

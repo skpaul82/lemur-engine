@@ -51,7 +51,7 @@ class VersionTagTest extends TagTestCase
     public function testCloseTag()
     {
         $this->tag->closeTag();
-        $this->assertEquals(config('lemur_version.bot.id'), $this->tag->getCurrentResponse());
+        $this->assertEquals(config('lemur_version.bot.id'), $this->tag->getCurrentTagContents());
     }
 
 

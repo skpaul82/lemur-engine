@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 use App\Models\Bot;
 use App\Models\CategoryGroup;
 use App\Models\Client;
+use App\Models\ClientCategory;
 use App\Models\Conversation;
+use App\Models\EmptyResponse;
 use App\Models\Language;
 use App\Models\Map;
 use App\Models\Set;
@@ -84,7 +86,12 @@ class TransformData
                     $item = Conversation::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'turn_id') {
                     $item = Turn::where('slug', $value)->firstOrFail();
-                } else {
+                } elseif ($key == 'empty_response_id') {
+                    $item = EmptyResponse::where('slug', $value)->firstOrFail();
+                } elseif ($key == 'client_category_id') {
+                    $item = ClientCategory::where('slug', $value)->firstOrFail();
+                }
+                else {
                     if (!is_array($value)) {
                         throw new \Exception('Unknown id item: ' . $key);
                     }

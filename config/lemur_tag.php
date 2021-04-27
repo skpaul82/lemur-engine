@@ -55,9 +55,6 @@ return [
         'request',
         'map',
     ],
-    'messages' => [
-        'maxSrai'=>'Max level of SRAI looping reached'
-    ],
     'recursion' => [
         'max' => 10,
         'message'=>'Error - thinking too deeply.'
@@ -69,6 +66,10 @@ return [
         '.org'=>' dot org',
         '.io'=>' dot io',
         '.org'=>' dot org',
+        '+' => ' PLUS ',
+        '/' => ' DIVIDE ',
+        '-' => ' SUBTRACT ',
+        '*' => ' MULTIPLY ',
     ],
 
 ];

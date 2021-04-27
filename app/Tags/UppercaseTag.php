@@ -48,7 +48,7 @@ class UppercaseTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $tagContents=mb_strtoupper($contents);
         $this->buildResponse($tagContents);
     }

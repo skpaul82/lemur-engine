@@ -55,7 +55,7 @@ class FirstTag extends AimlTag
             ]
         );
 
-        $contents = trim($this->getCurrentResponse(true));
+        $contents = trim($this->getCurrentTagContents(true));
         $tokens = explode(' ', $contents);
         $this->buildResponse(trim($tokens[0]));
     }

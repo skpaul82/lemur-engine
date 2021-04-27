@@ -16,6 +16,27 @@ class LemurStr
         return preg_split('/(\s*,*\s*)*[.?!]+(\s*,*\s*)*/', $str, -1, PREG_SPLIT_NO_EMPTY);
     }
 
+    public static function normalizeInput($str, $uppercase=true){
+
+        //some common replacements
+        foreach (config('lemur_tag.commonNormalizations') as $in => $out) {
+            $str = str_replace($in, $out, $str);
+        }
+
+        //replace everything but numbers
+        $str = preg_replace('/[^a-z0-9]+/i', ' ', $str);
+        //remove multiple whitespaces
+        $str = preg_replace('/\s+/', ' ', $str);
+        //trim
+        $str = trim($str);
+        if ($uppercase) {
+            //convert to upper
+            $str = mb_strtoupper($str);
+        }
+        return $str;
+
+    }
+
 
     /**
      * prepare the input
@@ -150,7 +171,10 @@ class LemurStr
 
         //some common replacements
         foreach (config('lemur_tag.commonNormalizations') as $in => $out) {
-            $str = str_replace($in, $out, $str);
+            //todo fix this at some point
+            if($in!='/'){
+                $str = str_replace($in, $out, $str);
+            }
         }
 
 

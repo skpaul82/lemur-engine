@@ -53,7 +53,7 @@ class DenormalizeTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         $languageId = $this->conversation->bot->language_id;
 
