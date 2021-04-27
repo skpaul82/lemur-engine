@@ -212,6 +212,7 @@ class CategoryController extends AppBaseController
 
             Flash::success('Category saved successfully.');
 
+
             //we may need to do some extra deleting
             if (isset($input['delete_original'])) {
                 if (isset($input['empty_response_id'])) {

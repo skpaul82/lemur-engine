@@ -45,7 +45,7 @@ class UppercaseTagTest extends TagTestCase
     {
         $this->tag->buildResponse('make uppercase');
         $this->tag->closeTag();
-        $this->assertEquals('MAKE UPPERCASE', $this->tag->getCurrentResponse());
+        $this->assertEquals('MAKE UPPERCASE', $this->tag->getCurrentTagContents());
     }
 
 

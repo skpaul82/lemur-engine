@@ -51,7 +51,7 @@ class LowercaseTagTest extends TagTestCase
     {
         $this->tag->buildResponse('MAKE LOWERCASE');
         $this->tag->closeTag();
-        $this->assertEquals('make lowercase', $this->tag->getCurrentResponse());
+        $this->assertEquals('make lowercase', $this->tag->getCurrentTagContents());
     }
 
 

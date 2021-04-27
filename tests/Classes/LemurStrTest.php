@@ -181,6 +181,7 @@ class LemurStrTest extends TestCase
      */
     public function testNormalizeForCategoryTable($string, $tags, $expectStr)
     {
+
         $str = LemurStr::normalizeForCategoryTable($string, $tags);
         $this->assertIsString($str);
         $this->assertEquals($expectStr, $str);

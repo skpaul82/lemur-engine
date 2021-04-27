@@ -53,7 +53,7 @@ class FeatureTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         if ($this->hasAttribute('NAME')) {
             $name = $this->getAttribute('NAME');

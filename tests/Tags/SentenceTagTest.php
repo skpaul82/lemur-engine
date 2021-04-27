@@ -53,7 +53,7 @@ class SentenceTagTest extends TagTestCase
     {
         $this->tag->buildResponse('make sentence');
         $this->tag->closeTag();
-        $this->assertEquals('Make sentence', $this->tag->getCurrentResponse());
+        $this->assertEquals('Make sentence', $this->tag->getCurrentTagContents());
     }
 
     /**
@@ -66,7 +66,7 @@ class SentenceTagTest extends TagTestCase
         $this->tag->buildResponse('make sentence one');
         $this->tag->buildResponse('make sentence two');
         $this->tag->closeTag();
-        $this->assertEquals('Make sentence one make sentence two', $this->tag->getCurrentResponse());
+        $this->assertEquals('Make sentence one make sentence two', $this->tag->getCurrentTagContents());
     }
 
     /**

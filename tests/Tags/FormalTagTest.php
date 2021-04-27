@@ -54,7 +54,7 @@ class FormalTagTest extends TagTestCase
     {
         $this->tag->buildResponse('MAKE FORMAL');
         $this->tag->closeTag();
-        $this->assertEquals('Make Formal', $this->tag->getCurrentResponse());
+        $this->assertEquals('Make Formal', $this->tag->getCurrentTagContents());
     }
 
 

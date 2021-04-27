@@ -6,6 +6,7 @@ use App\Traits\UiValidationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -157,7 +158,7 @@ class EmptyResponse extends Model
 
         //created from an empty response so delete it
         $model = EmptyResponse::select('empty_responses.id')->join('bots', 'bots.id', '=', 'empty_responses.bot_id')
-            ->where('empty_responses.slug', $input['empty_response_id'])
+            ->where('empty_responses.id', $input['empty_response_id'])
             ->where('bots.user_id', Auth::user()->id)
             ->first();
 

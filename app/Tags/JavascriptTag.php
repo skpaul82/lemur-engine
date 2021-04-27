@@ -74,7 +74,7 @@ class JavascriptTag extends AimlTag
                     ]
                 );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $this->buildResponse('[script]'.$contents.'[/script]');
     }
 }

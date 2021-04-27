@@ -54,7 +54,7 @@ class SetTag extends AimlTag
             ]
         );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
 
         if ($this->hasAttributes() &&
                 $this->checkIfParentAttributeValue('Li', 'LI_STATUS', 'true')) {

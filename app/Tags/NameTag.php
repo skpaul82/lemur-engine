@@ -40,7 +40,7 @@ class NameTag extends AimlTag
 
         //previously a tag such as <get> or <set> will have been called.....
         $previousObject = $this->getPreviousTagObject();
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         //$parentObject[$tagName]->processContents($this->_tagContents);
         $previousObject->setAttributes(['NAME'=>$contents]);
         $previousObjectIndex = $this->getTagStack()->maxPosition()-1;

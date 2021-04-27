@@ -6,6 +6,7 @@ use App\Traits\UiValidationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -220,7 +221,7 @@ class ClientCategory extends Model
         //created from an empty response so delete it
         $model = ClientCategory::select('client_categories.id')
             ->join('bots', 'bots.id', '=', 'client_categories.bot_id')
-            ->where('client_categories.slug', $input['client_category_id'])
+            ->where('client_categories.id', $input['client_category_id'])
             ->where('bots.user_id', Auth::user()->id)
             ->first();
 

@@ -52,7 +52,7 @@ class SentenceTag extends AimlTag
                     ]
                 );
 
-        $contents = $this->getCurrentResponse(true);
+        $contents = $this->getCurrentTagContents(true);
         $formattedContents = $this->formatSentence($contents);
         $this->buildResponse($formattedContents);
     }

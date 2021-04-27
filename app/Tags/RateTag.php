@@ -91,7 +91,7 @@ class RateTag extends AimlTag
             }
         } else {
             //this is a set rating...
-            $contents = $this->getCurrentResponse(true);
+            $contents = $this->getCurrentTagContents(true);
 
             //we will only save numbers...
             if (is_numeric($contents)) {

@@ -33,6 +33,18 @@ class WordSpellingGroupsTableSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
 
+            ],
+            [
+                'id' => 2,
+                'language_id' => 1,
+                'user_id' => 1,
+                'slug' => 'text-talk-expansions',
+                'name' => 'Text Talk Expansions',
+                'description' => 'Expand out common text talk spellings',
+                'is_master' => 1,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
             ]
 
         ]);

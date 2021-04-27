@@ -63,7 +63,7 @@ class StarTag extends AimlTag
                 'attributes'=>$this->getAttributes()
             ]);
 
-        $contents = $this->getCurrentResponse(false);
+        $contents = $this->getCurrentTagContents(false);
 
         if ($this->isInLiTag()) {
             $newContents = $this->buildAIMLIfInDoNotParseMode($contents);

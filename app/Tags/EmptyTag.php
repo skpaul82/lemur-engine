@@ -49,7 +49,7 @@ class EmptyTag extends AimlTag
             ]
         );
 
-        $input = $this->getCurrentResponse();
+        $input = $this->getCurrentTagContents();
 
         $empty = EmptyResponse::where('bot_id', $this->conversation->bot->id)->where('input', 'like', $input)->first();
 

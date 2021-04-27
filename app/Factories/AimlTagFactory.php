@@ -24,12 +24,10 @@ class AimlTagFactory
     public static function create($conversation, $tagName, $attributes)
     {
 
-        $otagName = $tagName;
-
         try {
 
-            //if this is a HTML tag......
-            if (self::isHtmlTag($tagName)) {
+
+            if (self::isHtmlTag($tagName)) {  //if this is a HTML tag......
                 $currentTagClass = "App\\Tags\\HtmlTag";
 
                 LemurLog::info(
@@ -63,7 +61,14 @@ class AimlTagFactory
                     $talkService = new TalkService(config('lemur_tag'), new AimlMatcher(), new AimlParser());
                     $tag = new $currentTagClass($talkService, $conversation, $attributes);
                 } else {
-                    $currentTagClass = "App\\Tags\\" . $tagName . "Tag";
+
+                    //check to see if a custom tag exists first...
+                    $currentTagClass = "App\\Tags\\Custom\\" . $tagName . "Tag";
+
+                    if(!class_exists($currentTagClass)){
+                        $currentTagClass = "App\\Tags\\" . $tagName . "Tag";
+                    }
+
 
                     LemurLog::info(
                         'Loading tag',
