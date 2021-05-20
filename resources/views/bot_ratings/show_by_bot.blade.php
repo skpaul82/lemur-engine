@@ -66,7 +66,6 @@
 
 @endif
 @push('scripts')
-    {{ Html::script('js/Chart.js') }}
     <script>
         $(document).ready(function() {
 
