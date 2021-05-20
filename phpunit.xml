@@ -15,6 +15,7 @@
             <directory suffix="Test.php">./tests/Requests</directory>
             <directory suffix="Test.php">./tests/Repositories</directory>
             <directory suffix="Test.php">./tests/Policies</directory>
+            <directory suffix="Test.php">./tests/APIs</directory>
         </testsuite>
 
         <testsuite name="Aiml">
