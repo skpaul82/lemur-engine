@@ -22,6 +22,9 @@ class LemurStr
         foreach (config('lemur_tag.commonNormalizations') as $in => $out) {
             $str = str_replace($in, $out, $str);
         }
+        foreach (config('lemur_tag.inputOnlyNormalizations') as $in => $out) {
+            $str = str_replace($in, $out, $str);
+        }
 
         //replace everything but numbers
         $str = preg_replace('/[^a-z0-9]+/i', ' ', $str);

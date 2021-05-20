@@ -19,6 +19,8 @@ use App\Models\Normalization;
 use App\Models\Wildcard;
 use App\Models\WordSpelling;
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Exceptions\UnauthorizedException;
@@ -58,10 +60,16 @@ class TalkService
         $botKey = $request->header('x_bot_key');
         $bot= $request->input('bot');
 
-        $bot = Bot::where('slug', $bot)->whereIn('status', ['A','T'])->firstOrFail();
+        $botFound = Bot::where('slug', $bot)->whereIn('status', ['A','T'])->first();
+        if(!$botFound){
+            throw new ModelNotFoundException('This bot does not exist: '.$bot);
+        }
 
-        if (!$bot->is_public) {
-            BotKey::where('value', $botKey)->where('bot_id', $bot->id)->firstOrFail();
+        if (!$botFound->is_public) {
+            $botKeyFound = BotKey::where('value', $botKey)->where('bot_id', $botFound->id)->first();
+            if(!$botKeyFound){
+                throw new AuthorizationException('You are not authorised to talk to this bot: '.$bot);
+            }
         }
 
         return true;

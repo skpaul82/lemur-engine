@@ -3,6 +3,7 @@
 trait ApiTestTrait
 {
     private $response;
+
     public function assertApiResponse(Array $actualData)
     {
         $this->assertApiSuccess();
@@ -28,5 +29,11 @@ trait ApiTestTrait
             }
             $this->assertEquals($actualData[$key], $expectedData[$key]);
         }
+    }
+
+    public function assertApi404()
+    {
+        $this->response->assertStatus(404);
+        $this->response->assertJson(['success' => false]);
     }
 }

@@ -66,10 +66,11 @@ return [
         '.org'=>' dot org',
         '.io'=>' dot io',
         '.org'=>' dot org',
+    ],
+    'inputOnlyNormalizations' => [
         '+' => ' PLUS ',
         '/' => ' DIVIDE ',
         '-' => ' SUBTRACT ',
         '*' => ' MULTIPLY ',
     ],
-
 ];

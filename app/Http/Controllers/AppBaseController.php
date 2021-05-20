@@ -27,7 +27,7 @@ class AppBaseController extends Controller
                 return $this->sendError($e->getMessage(), '403');
                 break;
             case 'ModelNotFoundException':
-                return $this->sendError('Cannot find item', '404');
+                return $this->sendError($e->getMessage(), '404');
                 break;
             default:
                 return $this->sendError($shortName.": ".$e->getMessage(), '500');
