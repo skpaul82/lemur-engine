@@ -100,6 +100,10 @@ trait ConversationHelper
         return $this->hasOne(\App\Models\Turn::class, 'conversation_id')->skip(1);
     }
 
+    public function pastHumanConversationLog()
+    {
+        return $this->hasOne(\App\Models\Turn::class, 'conversation_id')->where('turns.source',  'human')->skip(1);
+    }
 
     public function getInput()
     {

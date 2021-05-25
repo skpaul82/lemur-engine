@@ -1,37 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: maczilla
- * Date: 08/04/16
- * Time: 17:06
- *
- * When a random tag is encounted it is assumed that it will contain <li>options</li> inside
- * This class will create a randomly named array upon option
- * store the encounted <li>values</li>
- * and select an item when closed
- *
- *
- *
- */
 namespace App\Tags;
 
-use App\Classes\LemurLog;
 use App\Classes\LemurStr;
 use App\Models\Turn;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
 
 /**
- * Class That
+ * Class ThatTag
  * @package App\Tags
- *
- * <that/> = <that index="1,1"/> - the last sentence the bot uttered.
- * <that index="1,2"/> - the 2nd to last sentence in <response index="1"/>, provided it exists.
- * <that index="2,1"/> - The last sentence of <response index="2"/>.
- *
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
  */
-
-
 class ThatTag extends AimlTag
 {
     protected $tagName = "That";

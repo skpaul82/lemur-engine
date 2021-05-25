@@ -1,26 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 16/08/2016
- * Time: 17:51
- *
- *
- * @AimlTag Lowercase
- * @AimlVersion 1.0,2.0
- * @AimlTagDescription Formats a string to upper lower case
- *
- */
-
 namespace App\Tags;
 
 use App\Classes\LemurLog;
 use App\Models\Category;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
-use ProgramO\V3\DB;
-use ProgramO\V3\PDOException;
 
+/**
+ * Class SizeTag
+ * @package App\Tags
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
+ */
 class SizeTag extends AimlTag
 {
     protected $tagName = "Size";

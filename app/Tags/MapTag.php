@@ -1,25 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 16/08/2016
- * Time: 17:51
- *
- *
- * @AimlTag Lowercase
- * @AimlVersion 1.0,2.0
- * @AimlTagDescription Formats a string to upper upper case
- *
- */
-
 namespace App\Tags;
 
 use App\Classes\LemurLog;
 use App\Models\Map;
 use App\Models\MapValue;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
 
+/**
+ * Class MapTag
+ * @package App\Tags
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
+ */
 class MapTag extends AimlTag
 {
     protected $tagName = "Map";

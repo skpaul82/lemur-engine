@@ -1,29 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 16/08/2016
- * Time: 17:51
- *
- *
- * @AimlTag Lowercase
- * @AimlVersion 1.0,2.0
- * @AimlTagDescription Formats a string to upper upper case
- *
- */
-
 namespace App\Tags;
 
 use App\Classes\LemurLog;
 use App\Models\WordTransformation;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
-use ProgramO\V3\DB;
 
 /**
- * Class Person
+ * Class PersonTag
  * @package App\Tags
- * which transforms pronouns between first and second person
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
  */
 class PersonTag extends AimlTag
 {

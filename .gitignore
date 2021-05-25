@@ -58,7 +58,15 @@ https.conf
 
 composer.lock
 
-# But not these files...
+# Ignore anything in the custom tag directory
 app/Tags/Custom/*
+
+# Except the example custom tags
 !app/Tags/Custom/GooglesearchTag.php
 !app/Tags/Custom/HelloworldTag.php
+
+# Ignore anything in the customtag config directory
+config/customtags/*
+
+# Except the example custom tag config
+!config/customtags/hellowworld.php
