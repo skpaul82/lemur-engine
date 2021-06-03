@@ -1,11 +1,14 @@
 <?php
-
 namespace App\Tags;
 
-use App\Classes\LemurLog;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
 
+/**
+ * Class TemplateTag
+ * @package App\Tags
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
+ */
 class TemplateTag extends AimlTag
 {
     protected $tagName = "Template";

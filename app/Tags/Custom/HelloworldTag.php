@@ -1,17 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 16/08/2016
- * Time: 17:51
- *
- *
- * @AimlTag Lowercase
- * @AimlVersion 1.0,2.0
- * @AimlTagDescription Formats a string to upper lower case
- *
- */
-
 namespace App\Tags\Custom;
 
 use App\Classes\LemurLog;
@@ -40,6 +27,7 @@ use App\Models\Conversation;
 class HelloworldTag extends AimlTag
 {
     protected $tagName = "Helloworld";
+    protected $config;
 
 
     /**
@@ -50,6 +38,7 @@ class HelloworldTag extends AimlTag
     public function __construct(Conversation $conversation, $attributes = [])
     {
         parent::__construct($conversation, $attributes);
+        $this->config = config('customtags.helloworld');
     }
 
 
@@ -70,6 +59,6 @@ class HelloworldTag extends AimlTag
         );
 
         //build response in the stack
-        $this->buildResponse('Hello World!');
+        $this->buildResponse($this->config['message']);
     }
 }

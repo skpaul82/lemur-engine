@@ -270,7 +270,8 @@ class Category extends Model
     public static function transformCategory($model)
     {
 
-        if (!isset($model->category_group_id) && isset($model->category_group_slug)) {
+        if (isset($model->category_group_slug)) {
+
             $categoryGroup = CategoryGroup::where('slug', $model->category_group_slug)->first();
             if ($categoryGroup === null) {
                 $categoryGroup = new CategoryGroup();
@@ -283,9 +284,9 @@ class Category extends Model
                 $categoryGroup->save();
             }
             $model->category_group_id = $categoryGroup->id;
+
             unset($model->category_group_slug);
-        }elseif(isset($model->category_group_id) && isset($model->category_group_slug)) {
-            unset($model->category_group_slug);
+
         }
 
         //normalise the record

@@ -1,23 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 16/08/2016
- * Time: 17:51
- *
- *
- * @AimlTag Lowercase
- * @AimlVersion 1.0,2.0
- * @AimlTagDescription Formats a string to upper upper case
- *
- */
-
 namespace App\Tags;
 
 use App\Classes\LemurLog;
 use App\Models\Conversation;
 use SimpleXMLElement;
 
+/**
+ * Class HtmlTag
+ * @package App\Tags
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
+ */
 class HtmlTag extends AimlTag
 {
     protected $tagName;
@@ -73,7 +66,24 @@ class HtmlTag extends AimlTag
                     'attributes'=>$this->getAttributes()
                     ]
                 );
+
+        $aimlTag = mb_strtolower($this->tagName);
+        //dd($contents,$this->tagName,$this->getAttributes());
+
+
+        if (!empty($this->allowHtml)) {
+            if ($aimlTag!='') {
+                if ($this->tagType=='single') {
+
+                    $contents = "<{$aimlTag}/>";
+                    $this->buildResponse($contents);
+                }
+            }
+        }
+
     }
+
+
 
     public function processContents($contents)
     {

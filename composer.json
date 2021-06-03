@@ -12,13 +12,16 @@
         "mysql",
         "program-o",
         "program o",
-        "programo"
+        "programo",
+        "lemur engine",
+        "lemur-engine"
     ],
     "require": {
         "php": "^7.4.0",
         "ext-intl": "*",
         "ext-simplexml": "*",
         "ext-xml": "*",
+        "ext-json": "*",
         "aws/aws-sdk-php-laravel": "^3.5",
         "doctrine/dbal": "~2.3",
         "dyrynda/laravel-cascade-soft-deletes": "dev-master",
@@ -64,7 +67,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "App\\Tags\\Custom\\": "app/"
+            "App\\Tags\\Custom\\": "app/Tags/Custom"
         },
         "classmap": [
             "database/seeds",

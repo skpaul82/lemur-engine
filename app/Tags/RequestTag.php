@@ -1,37 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: maczilla
- * Date: 08/04/16
- * Time: 17:06
- *
- * When a random tag is encounted it is assumed that it will contain <li>options</li> inside
- * This class will create a randomly named array upon option
- * store the encounted <li>values</li>
- * and select an item when closed
- *
- *
- *
- */
 namespace App\Tags;
 
 use App\Models\Conversation;
 use App\Models\Turn;
 
 /**
- * Class Request
+ * Class RequestTag
  * @package App\Tags
- *
- * <request/> - the current request (all sentences in that request)
- * <request index="2"/> - the previous requests (all sentences in that request)
- * <request index="N"/> - the nth requests (all sentences in that request)
- * e.g. Hello. My name is Bob
- * Hello. My name is Bob = <request/>
- * 'unknown' = <request index="2"/>
- *
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
  */
-
-
 class RequestTag extends AimlTag
 {
     protected $tagName = "Request";

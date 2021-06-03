@@ -1,22 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liseperu
- * Date: 15/08/2016
- * Time: 22:39
- */
-
 namespace App\Tags;
 
 use App\Classes\LemurLog;
 use App\Classes\LemurStr;
 use App\Classes\TagStack;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use App\Models\Conversation;
-use ProgramO\V3\Logger;
 use SimpleXMLElement;
 
+/**
+ * Class AimlTag
+ * @package App\Tags
+ * Documentation on this tag, examples and explanation
+ * see: https://docs.lemurengine.com/aiml.html
+ */
 abstract class AimlTag
 {
 
