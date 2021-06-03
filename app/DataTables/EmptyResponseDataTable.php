@@ -46,11 +46,17 @@ class EmptyResponseDataTable extends DataTable
                 $id = $row['id'];
             }
 
+
             return view(
                 'empty_responses.datatables_actions',
-                ['id'=>$id, 'title'=>$this->title, 'htmlTag'=>$this->htmlTag,
-                'link'=>$this->link,
-                'bot'=>$row['bot']]
+                    ['id'=>$id,
+                        'title'=>$this->title,
+                        'htmlTag'=>$this->htmlTag,
+                        'link'=>$this->link,
+                        'bot'=>$row['bot'],
+                        'searchValue'=>$row['input'],
+                        'searchCol'=>"4"
+                    ]
             );
         });
     }
@@ -81,7 +87,8 @@ class EmptyResponseDataTable extends DataTable
              ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
-                    addRowFeatures(settings, json, "'.$this->link.'","edit")
+                    
+                    addRowFeatures(settings, json, "searchDatatable","turns")
                 }',
                 'initComplete' => 'function(settings, json) {
                 
