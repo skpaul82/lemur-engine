@@ -319,6 +319,7 @@ class CategoryController extends AppBaseController
 
         $category = $this->categoryRepository->update($input, $category->id);
 
+
         Flash::success('Category updated successfully.');
 
         if (!empty($input['redirect_url'])) {

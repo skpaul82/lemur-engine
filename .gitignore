@@ -70,3 +70,7 @@ config/customtags/*
 
 # Except the example custom tag config
 !config/customtags/hellowworld.php
+
+# Ignore anything in the customtag config directory
+resources/widgets/custom/*
+!resources/widgets/custom/.gitkeep

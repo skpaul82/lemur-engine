@@ -34,6 +34,7 @@ return [
     'html' => [
         'br'=>'single',
         'a'=>'wrapped',
+        'b'=>'wrapped',
         'img'=>'wrapped',
         "strong"=>'wrapped',
     ],

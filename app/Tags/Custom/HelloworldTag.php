@@ -38,7 +38,7 @@ class HelloworldTag extends AimlTag
     public function __construct(Conversation $conversation, $attributes = [])
     {
         parent::__construct($conversation, $attributes);
-        $this->config = config('custom.helloworld');
+        $this->config = config('customtags.helloworld');
     }
 
 

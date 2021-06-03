@@ -26,7 +26,6 @@ class AimlTagFactory
 
         try {
 
-
             if (self::isHtmlTag($tagName)) {  //if this is a HTML tag......
                 $currentTagClass = "App\\Tags\\HtmlTag";
 
@@ -59,6 +58,20 @@ class AimlTagFactory
                     );
 
                     $talkService = new TalkService(config('lemur_tag'), new AimlMatcher(), new AimlParser());
+                    $tag = new $currentTagClass($talkService, $conversation, $attributes);
+                } elseif (self::isRecursiveCustomTag($tagName)) {
+                    $currentTagClass = "App\\Tags\\Custom\\" . $tagName . "Tag";
+
+                    LemurLog::info(
+                        'Loading recursive custom tag',
+                        [
+                            'conversation_id' => $conversation->id,
+                            'turn_id' => $conversation->currentTurnId(),
+                            'tag_name' => $tagName,
+                        ]
+                    );
+
+                    $talkService = new TalkService(config('customtags.lemur_customtag'), new AimlMatcher(), new AimlParser());
                     $tag = new $currentTagClass($talkService, $conversation, $attributes);
                 } else {
 
@@ -109,6 +122,32 @@ class AimlTagFactory
 
         if (isset(array_flip(config('lemur_tag.recursive'))[strtolower($tagName)])) {
             return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * If you want to create a recursive custom tag then create a config file called
+     * config/customtages/lemur_customtag.php
+     * with the following array
+     *
+     * return [
+     *       'recursive' => [
+     *           'your_tag_name',
+     *           ]
+     *       ];
+     *
+     * @param $tagName
+     * @return bool
+     */
+    public static function isRecursiveCustomTag($tagName)
+    {
+
+        if (config()->has('customtags.lemur_customtag.recursive')) {
+            if (isset(array_flip(config('customtags.lemur_customtag.recursive'))[strtolower($tagName)])) {
+                return true;
+            }
         }
         return false;
     }

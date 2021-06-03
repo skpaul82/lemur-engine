@@ -66,7 +66,24 @@ class HtmlTag extends AimlTag
                     'attributes'=>$this->getAttributes()
                     ]
                 );
+
+        $aimlTag = mb_strtolower($this->tagName);
+        //dd($contents,$this->tagName,$this->getAttributes());
+
+
+        if (!empty($this->allowHtml)) {
+            if ($aimlTag!='') {
+                if ($this->tagType=='single') {
+
+                    $contents = "<{$aimlTag}/>";
+                    $this->buildResponse($contents);
+                }
+            }
+        }
+
     }
+
+
 
     public function processContents($contents)
     {
