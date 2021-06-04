@@ -70,6 +70,7 @@
 
                       @push('scripts')
                           {{ Html::script('js/select2.js') }}
+                          {{ Html::script('js/unlock.js') }}
                       @endpush
 
                   @else
