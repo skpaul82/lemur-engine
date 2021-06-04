@@ -55,13 +55,32 @@ function getFormattedItem(item, field){
 function addRowFeatures(settings, json, linkModel, linkAction){
 
     $('table#dataTableBuilder td').each(function (k,v) {
-        $(v).click(function(){
-            if(!$(this).is(':last-child'))
-            {
-                var rowId = $(this).closest('td').nextAll(':has(input.rowId):first').find('input.rowId').val();
-                window.location.href = "/"+linkModel+"/"+rowId+"/"+linkAction;
-            }
-        })
+
+        if(linkModel=='searchDatatable'){
+
+            $(v).click(function(){
+                if(!$(this).is(':last-child'))
+                {
+                    var searchValue = $(this).closest('td').nextAll(':has(input.searchValue):first').find('input.searchValue').val();
+                    var searchCol = $(this).closest('td').nextAll(':has(input.searchCol):first').find('input.searchCol').val();
+                    window.location.href = "/"+linkAction+"?q="+searchValue+"&col="+searchCol;
+                }
+            })
+
+
+        }else{
+
+            $(v).click(function(){
+                if(!$(this).is(':last-child'))
+                {
+                    var rowId = $(this).closest('td').nextAll(':has(input.rowId):first').find('input.rowId').val();
+                    window.location.href = "/"+linkModel+"/"+rowId+"/"+linkAction;
+                }
+            })
+
+        }
+
+
     });
 
 

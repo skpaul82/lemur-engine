@@ -12,4 +12,6 @@
         <i class="glyphicon glyphicon-trash"></i>
     </a>
     {!! Form::hidden('rowId', $id, ['class'=>'rowId'] ) !!}
+    {!! Form::hidden('searchValue', $searchValue, ['class'=>'searchValue'] ) !!}
+    {!! Form::hidden('searchCol', $searchCol, ['class'=>'searchCol'] ) !!}
 </div>
