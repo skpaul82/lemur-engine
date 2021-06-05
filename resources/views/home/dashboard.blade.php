@@ -6,7 +6,7 @@
             </h1>
         </section>
         <!-- Main content -->
-        <section class="content">
+        <section data-masonry='{"percentPosition": true }'>
 
             @php $index = 0; @endphp
 
@@ -19,41 +19,34 @@
                 @foreach($authorBots as $bot)
 
 
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="thumbnail">
+                                <span class=""><img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture"></span>
+                                <div class="home-info-box-content">
+                                    <span class="info-box-text">{!! $bot->name !!}</span>
+                                    <span class="info-box-number" style="word-break: break-all">{!! $bot->summary !!}<br/></span>
+                                    <span class="text-muted-wrapped">{!! $bot->conversationTurnsLast28Days->count() !!} interactions in last 28 days</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                                <div class="">
+                                    <div class="btn-group bot-commands" role="group" aria-label="Bot Commands">
 
-                    <div class="info-box">
-                        <span class=""><img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture"></span>
+                                        @if($bot->user_id !== Auth::user()->id )
+                                            <button type="button" class="btn btn-default open-chat" data-chatbot="{!! $bot->slug !!}" data-target="#modal-chat">
+                                                Chat
+                                            </button>
+                                        @else
+                                            <a href="{!! url('/bot/'.$bot->slug.'/chat') !!}" class="btn btn-default">Chat</a>
+                                            <a href="{!! url('/bots/'.$bot->slug.'/edit') !!}" class="btn btn-info">Edit</a>
+                                            <a href="{!! url('/bot/logs/'.$bot->slug.'/list') !!}" class="btn btn-warning">Logs</a>
+                                        @endif
+                                    </div>
 
-                        <div class="home-info-box-content">
-                            <span class="info-box-text">{!! $bot->name !!}</span>
-                            <span class="info-box-number">{!! $bot->summary !!}</span>
-                            <span class="text-muted-wrapped">{!! $bot->conversationTurnsLast28Days->count() !!} interactions in last 28 days</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                        <div class="info-box-small">
-                            <div class="btn-group bot-commands" role="group" aria-label="Bot Commands">
-
-                                @if($bot->user_id !== Auth::user()->id )
-                                <button type="button" class="btn btn-default open-chat" data-chatbot="{!! $bot->slug !!}" data-target="#modal-chat">
-                                    Chat
-                                </button>
-                                @else
-                                    <a href="{!! url('/bot/'.$bot->slug.'/chat') !!}" class="btn btn-default">Chat</a>
-                                    <a href="{!! url('/bots/'.$bot->slug.'/edit') !!}" class="btn btn-info">Edit</a>
-                                    <a href="{!! url('/bot/logs/'.$bot->slug.'/list') !!}" class="btn btn-warning">Logs</a>
-                                @endif
+                                </div>
                             </div>
-
                         </div>
-                    </div>
 
 
-
-
-
-
-                    <!-- /.info-box -->
-                </div>
 
                     @php $index++; @endphp
 
@@ -61,7 +54,7 @@
 
             @endif
         </section>
-
+        <div class="clearfix"></div>
         @if(!empty($publicBots->first()))
 
             <!-- Content Header (Page header) -->
@@ -78,17 +71,15 @@
 
 
                     <div class="col-md-3 col-sm-6 col-xs-12">
-
-                        <div class="info-box">
+                        <div class="thumbnail">
                             <span class=""><img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture"></span>
-
                             <div class="home-info-box-content">
                                 <span class="info-box-text">{!! $bot->name !!}</span>
-                                <span class="info-box-number">{!! $bot->summary !!}</span>
+                                <span class="info-box-number" style="word-break: break-all">{!! $bot->summary !!}<br/></span>
                                 <span class="text-muted-wrapped">{!! $bot->conversationTurnsLast28Days->count() !!} interactions in last 28 days</span>
                             </div>
                             <!-- /.info-box-content -->
-                            <div class="info-box-small">
+                            <div class="">
                                 <div class="btn-group bot-commands" role="group" aria-label="Bot Commands">
 
                                     @if($bot->user_id !== Auth::user()->id )
@@ -104,13 +95,6 @@
 
                             </div>
                         </div>
-
-
-
-
-
-
-                        <!-- /.info-box -->
                     </div>
 
                     @php $index++; @endphp
@@ -118,6 +102,8 @@
                 @endforeach
 
             </section>
+
+            <div class="clearfix"></div>
 
         @endif
         <div class="modal" id="modal-chat" style="display: none;">
@@ -168,6 +154,9 @@
         <!-- /.content -->
 
         @push('scripts')
+
+
+            {{ Html::script('https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js') }}
             <script>
                 $( document ).ready(function() {
 
