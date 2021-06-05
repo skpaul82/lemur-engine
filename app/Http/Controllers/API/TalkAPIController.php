@@ -69,13 +69,34 @@ class TalkAPIController extends AppBaseController
      * @param TalkService $talkService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
+     * @deprecated you should now send meta requests to GET /api/meta/{botId} instead of using POST
      */
-    public function meta(CreateTalkRequest $request, TalkService $talkService)
+    public function old_meta(CreateTalkRequest $request, TalkService $talkService)
+    {
+
+        $botSlug = $request->input('bot', false);
+        return $this->meta($botSlug,  $request,  $talkService);
+
+
+    }
+
+    /**
+     * Initiate a talk to the bot...
+     * @param $botSlug
+     * @param CreateTalkRequest $request
+     * @param TalkService $talkService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
 
         try {
+
+            $request->merge([
+                'bot' => $botSlug,
+            ]);
+
             $talkService->checkAuthAccess($request);
-            $botSlug = $request->input('bot', false);
 
             if ($botSlug) {
                 $bot = Bot::where('slug', $botSlug)->firstOrFail();
