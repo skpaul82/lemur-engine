@@ -227,7 +227,14 @@ class CategoryController extends AppBaseController
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);
-            Flash::error('An error occurred - no changes have been made: '.$e->getMessage());
+
+            //display generic error
+            Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 
@@ -322,7 +329,9 @@ class CategoryController extends AppBaseController
 
         Flash::success('Category updated successfully.');
 
-        if (!empty($input['redirect_url'])) {
+        if (!empty($input['action_button']) && $input['action_button']=='Save And Continue') {
+            return redirect('/categories/'.$category->slug.'/edit');
+        } elseif (!empty($input['redirect_url'])) {
             return redirect($input['redirect_url']);
         } else {
             return redirect(route('categories.index'));
@@ -398,12 +407,20 @@ class CategoryController extends AppBaseController
         } catch (AimlUploadException $e) {
             DB::rollback();
             Log::error($e);
+            //we can display entire message to all - as this will have useful XML parsing errors in it
             Flash::error('An error occurred - no changes have been made - '.$e->getMessage());
             return redirect()->back();
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);
-            Flash::error('An error occurred - no changes have been made');
+
+            //display generic error
+            \Laracasts\Flash\Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 

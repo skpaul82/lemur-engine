@@ -3,7 +3,14 @@
 
     <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="slug_div">
         {!! Form::label('slug', 'ClientId:', ['data-test'=>"slug_label"]) !!}
-        {!! Form::text('', $client->slug, ['class' => 'form-control', 'id'=>"slug_field", 'readonly'=>'readonly', 'data-test'=>"slug_field"]) !!}
+        <div class="input-group">
+            {!! Form::text('', $client->slug, ['class' => 'form-control', 'id'=>"slug_field", 'readonly'=>'readonly', 'data-test'=>"slug_field"]) !!}
+            <div class="input-group-btn">
+                <span name='unlock' id='openEditSlugDataTableModal' data-id="{{$client->slug}}" data-test='slug-unlock-button'
+                      class='btn btn-danger slug-unlock-button'><i class='fa fa-lock'></i></span>
+            </div>
+        </div>
+
     </div>
 
 @endif

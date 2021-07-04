@@ -47,8 +47,7 @@
 
 
   <div class="content">
-      @include('flash::message')
-      @include('layouts.errors')
+      @include('layouts.feedback')
       <div class="box box-primary">
           <div class="box-body edit-page">
               @php
@@ -68,9 +67,11 @@
                           <div class="clearfix"></div>
                       </div>
 
+                          <!-- Slug Field Edit Modal -->
+                      @include('layouts.edit_slug_modal')
+
                       @push('scripts')
                           {{ Html::script('js/select2.js') }}
-                          {{ Html::script('js/unlock.js') }}
                       @endpush
 
                   @else

@@ -42,10 +42,14 @@ class UserDataTable extends DataTable
 
 
             return view(
-                'layouts.datatables_actions',
-                ['id'=>$row['slug'], 'title'=>$this->title, 'htmlTag'=>$this->htmlTag,
-                'link'=>$this->link]
+                'users.datatables_actions',
+                ['id'=>$row['slug'],
+                    'title'=>$this->title,
+                    'htmlTag'=>$this->htmlTag,
+                    'link'=>$this->link,
+                    'deletedAt'=>$row['deleted_at']]
             );
+
         });
     }
 
@@ -75,7 +79,7 @@ class UserDataTable extends DataTable
              ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
-                    addRowFeatures(settings, json, "'.$this->link.'","edit")
+                    addRowFeatures(settings, json, "'.$this->link.'","inline")
                 }',
                 'initComplete' => 'function(settings, json) {
                     

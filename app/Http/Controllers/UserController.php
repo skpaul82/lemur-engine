@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\DataTables\UserDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateBotRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserSlugRequest;
+use App\Models\Bot;
 use App\Repositories\UserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -98,7 +101,14 @@ class UserController extends AppBaseController
             // An error occurred; cancel the transaction...
             DB::rollback();
             Log::error($e);
-            Flash::error('An error occurred - no changes have been made');
+
+            //display generic error
+            \Laracasts\Flash\Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 
@@ -200,7 +210,14 @@ class UserController extends AppBaseController
             // An error occurred; cancel the transaction...
             DB::rollback();
             Log::error($e);
-            Flash::error('An error occurred - no changes have been made');
+
+            //display generic error
+            \Laracasts\Flash\Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 
@@ -377,5 +394,119 @@ class UserController extends AppBaseController
                 'link'=>$this->link, 'htmlTag'=>$this->htmlTag,
                 'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder]
         );
+    }
+
+
+    /**
+     * Restore the a soft deleted it...
+     *
+     * @param User $user
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    public function restore($user)
+    {
+
+        $this->authorize('restore', $user);
+
+
+        $this->userRepository->makeModel()->withTrashed()->where('id',$user->id)->first()->restore();
+
+        if (empty($user)) {
+            Flash::error('Error restoring user');
+            return redirect(route('users.index'));
+        }
+
+        Flash::success('User restored successfully.');
+
+        if(!empty($input['redirect_url'])){
+            return redirect($input['redirect_url']);
+        }else{
+            return redirect(route('users.index'));
+        }
+
+    }
+
+
+    /**
+     * Remove the specified Bot from storage.
+     *
+     * @param User $user
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function forceDestroy($user)
+    {
+
+        $this->authorize('forceDelete', $user);
+
+        if (empty($user)) {
+            Flash::error('User not found');
+            return redirect()->back();
+        }
+
+
+        try {
+            $this->userRepository->forceDelete($user->id);
+            Flash::success('User permanently deleted successfully.');
+        } catch (\Exception $e) {
+
+            // An error occurred; cancel the transaction...
+            Log::error($e);
+
+            //display generic error
+            Flash::error('An error occurred - no changes have been made.<br/>Please check sure that all the bots and bot data belonging to this user has been deleted before you try to delete the user.');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
+        }
+
+
+        return redirect()->back();
+    }
+
+
+    /**
+     * Update the specified User in storage.
+     *
+     * @param  User $user
+     * @param UpdateUserSlugRequest $request
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function slugUpdate($user, UpdateUserSlugRequest $request)
+    {
+
+        $this->authorize('update', $user);
+
+        $inputAll=$request->all();
+
+        $userCheck = $this->userRepository->getBySlug($inputAll['original_slug']);
+
+        if (empty($user)||empty($userCheck)) {
+            Flash::error('User not found');
+            return redirect(route('users.index'));
+        }
+
+        if($userCheck->id != $user->id){
+            Flash::error('User slug mismatch');
+            return redirect(route('users.index'));
+        }
+
+
+        $input['slug'] = $inputAll['slug'];
+        $user = $this->userRepository->update($input, $user->id);
+
+        Flash::success('User slug updated successfully.');
+
+        return redirect(route('users.index'));
+
+
+
     }
 }

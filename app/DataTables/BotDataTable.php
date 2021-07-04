@@ -47,9 +47,12 @@ class BotDataTable extends DataTable
             }
 
             return view(
-                'layouts.datatables_actions',
-                ['id'=>$id, 'title'=>$this->title, 'htmlTag'=>$this->htmlTag,
-                'link'=>$this->link]
+                'bots.datatables_actions',
+                ['id'=>$id,
+                    'title'=>$this->title,
+                    'htmlTag'=>$this->htmlTag,
+                    'link'=>$this->link,
+                    'deletedAt'=>$row['deleted_at']]
             );
         });
     }
@@ -80,7 +83,7 @@ class BotDataTable extends DataTable
             ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
-                    addRowFeatures(settings, json, "'.$this->link.'","")
+                    addRowFeatures(settings, json, "'.$this->link.'","inline")
                 }',
                 'initComplete' => 'function(settings, json) {
                     

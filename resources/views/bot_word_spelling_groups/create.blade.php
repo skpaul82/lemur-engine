@@ -7,7 +7,7 @@
         </h1>
     </section>
     <div class="content">
-        @include('layouts.errors')
+        @include('layouts.feedback')
         <div class="box box-primary">
             <div class="box-body add-page">
                 <div class="row">
@@ -32,6 +32,5 @@
 @endsection
 @push('scripts')
     {{ Html::script('js/validation.js') }}
-    {{ Html::script('js/unlock.js') }}
     {{ Html::script('js/select2.js') }}
 @endpush

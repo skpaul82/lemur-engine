@@ -7,7 +7,7 @@
         </h1>
     </section>
     <div class="content">
-        @include('layouts.errors')
+        @include('layouts.feedback')
         <div class="box box-primary">
             <div class="box-body">
                 <div class="callout callout-info col-md-12">You cannot create wildcards they are identified and generated during a conversation between the bot and the user.</div>

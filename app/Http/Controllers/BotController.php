@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBotRequest;
 use App\Http\Requests\CreateTalkRequest;
 use App\Http\Requests\UpdateBotRequest;
+use App\Http\Requests\UpdateBotSlugRequest;
+use App\Http\Requests\UpdateClientSlugRequest;
 use App\Models\BotAvatar;
 use App\Models\BotCategoryGroup;
 use App\Models\BotKey;
@@ -28,7 +30,6 @@ use App\Repositories\BotRepository;
 use App\Services\BotStatsService;
 use App\Services\TalkService;
 use Carbon\Carbon;
-use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Laracasts\Flash\Flash;
 use Mockery\CountValidator\CountValidatorAbstract;
 use mysql_xdevapi\Exception;
 use Response;
@@ -153,7 +155,14 @@ class BotController extends AppBaseController
             // An error occurred; cancel the transaction...
             DB::rollback();
             Log::error($e);
+
+            //display generic error
             Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 
@@ -259,6 +268,12 @@ class BotController extends AppBaseController
 
         $input = $request->all();
 
+        //if this a request to restore....
+        if(!empty($input['restore'])){
+            return $this->restore($bot->id, $request);
+        }
+
+
 
         try {
             //start the transaction
@@ -275,7 +290,14 @@ class BotController extends AppBaseController
             // An error occurred; cancel the transaction...
             DB::rollback();
             Log::error($e);
+
+            //display generic error
             Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 
@@ -826,5 +848,123 @@ class BotController extends AppBaseController
         }
 
         return $bot;
+    }
+
+
+
+    /**
+     * Restore the a soft deleted it...
+     *
+     * @param Bot $bot
+     * @param UpdateBotRequest $request
+     *
+     * @return Response
+     * @throws \Exception
+     */
+    public function restore($bot, UpdateBotRequest $request)
+    {
+
+        $this->authorize('update', $bot);
+
+        $input = $request->all();
+
+        if(!empty($input['restore'])){
+            $this->botRepository->makeModel()->withTrashed()->where('id',$bot->id)->first()->restore();
+        }
+
+        if (empty($bot)) {
+            Flash::error('Error restoring bot');
+            return redirect(route('bots.index'));
+        }
+
+        Flash::success('Bot restored successfully.');
+
+        if(!empty($input['redirect_url'])){
+            return redirect($input['redirect_url']);
+        }else{
+            return redirect(route('bots.index'));
+        }
+
+    }
+
+
+    /**
+     * Remove the specified Bot from storage.
+     *
+     * @param  Bot $bot
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function forceDestroy($bot)
+    {
+        $this->authorize('forceDelete', $bot);
+
+        if (empty($bot)) {
+            Flash::error('Bot not found');
+            return redirect()->back();
+        }
+
+
+        try {
+            $this->botRepository->forceDelete($bot->id);
+            Flash::success('Bot and related items permanently deleted successfully.');
+        } catch (\Exception $e) {
+
+            // An error occurred; cancel the transaction...
+            Log::error($e);
+
+            //display generic error
+            Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
+        }
+
+        return redirect()->back();
+
+
+    }
+
+    /**
+     * Update the specified Bot in storage.
+     *
+     * @param  Bot $bot
+     * @param UpdateBotSlugRequest $request
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function slugUpdate($bot, UpdateBotSlugRequest $request)
+    {
+
+        $this->authorize('update', $bot);
+
+        $inputAll=$request->all();
+
+        $botCheck = $this->botRepository->getBySlug($inputAll['original_slug']);
+
+        if (empty($bot)||empty($botCheck)) {
+            Flash::error('Bot not found');
+            return redirect(route('bots.index'));
+        }
+
+        if($botCheck->id != $bot->id){
+            Flash::error('Bot slug mismatch');
+            return redirect(route('bots.index'));
+        }
+
+
+        $input['slug'] = $inputAll['slug'];
+        $bot = $this->botRepository->update($input, $bot->id);
+
+        Flash::success('Bot slug updated successfully.');
+
+        return redirect(route('bots.index'));
+
+
+
     }
 }

@@ -6,7 +6,10 @@ use App\DataTables\ConversationDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateConversationRequest;
 use App\Http\Requests\UpdateConversationRequest;
+use App\Http\Requests\UpdateConversationSlugRequest;
+use App\Http\Requests\UpdateLanguageSlugRequest;
 use App\Models\Bot;
+use App\Models\Language;
 use App\Repositories\ConversationRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -151,5 +154,45 @@ class ConversationController extends AppBaseController
         Flash::success('Conversation deleted successfully.');
 
         return redirect()->back();
+    }
+
+    /**
+     * Update the specified Conversation in storage.
+     *
+     * @param  Conversation $conversation
+     * @param UpdateConversationSlugRequest $request
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function slugUpdate($conversation, UpdateConversationSlugRequest $request)
+    {
+
+        $this->authorize('update', $conversation);
+
+        $inputAll=$request->all();
+
+        $conversationCheck = $this->conversationRepository->getBySlug($inputAll['original_slug']);
+
+        if (empty($conversation)||empty($conversationCheck)) {
+            Flash::error('Conversation not found');
+            return redirect(route('conversations.index'));
+        }
+
+        if($conversationCheck->id != $conversation->id){
+            Flash::error('Conversation slug mismatch');
+            return redirect(route('conversations.index'));
+        }
+
+
+        $input['slug'] = $inputAll['slug'];
+        $conversation = $this->conversationRepository->update($input, $conversation->id);
+
+        Flash::success('Conversation slug updated successfully.');
+
+        return redirect(route('conversations.index'));
+
+
+
     }
 }

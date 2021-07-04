@@ -9,9 +9,9 @@
         <div class="clearfix"></div>
     </section>
     <div class="content">
-        <div class="clearfix"></div>
 
-        @include('flash::message')
+        <div class="clearfix"></div>
+        @include('layouts.feedback')
 
         <div class="clearfix"></div>
         <div class="box box-primary">
