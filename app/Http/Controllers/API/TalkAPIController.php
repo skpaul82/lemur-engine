@@ -48,8 +48,6 @@ class TalkAPIController extends AppBaseController
     public function store(CreateTalkRequest $request, TalkService $talkService)
     {
 
-        dd(2);
-
         try {
             $talkService->checkAuthAccess($request);
 
