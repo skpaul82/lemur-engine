@@ -11,3 +11,5 @@
 @endpush
 
 @include('layouts.datatable_delete_modal')
+@include('bots.hard_delete_modal')
+@include('bots.restore_modal')

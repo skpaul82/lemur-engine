@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Bot;
+use App\Models\Client;
 use App\Models\Coin;
 use App\Models\EmptyResponse;
+use App\Models\Language;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -209,6 +212,102 @@ Route::delete('botRatings/reset', 'BotRatingController@reset')
 
 Route::resource('botRatings', 'BotRatingController')
     ->middleware(['auth:web','data.transform']);
+
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN BOT TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/bots'], function () {
+    Route::bind('saBotSlug', function ($slug) {
+        try {
+            $bot = App\Models\Bot::where('slug', $slug)->withTrashed()->firstOrFail();
+            return $bot;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saBotSlug}', 'BotController@slugUpdate')
+        ->middleware('auth:web');
+    Route::PATCH('/restore/{saBotSlug}', 'BotController@restore')
+        ->middleware('auth:web');
+    Route::DELETE('/{saBotSlug}', 'BotController@forceDestroy')
+        ->middleware('auth:web');
+});
+
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN USER TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/users'], function () {
+    Route::bind('saUserSlug', function ($slug) {
+        try {
+            $user = App\Models\User::where('slug', $slug)->withTrashed()->firstOrFail();
+            return $user;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saUserSlug}', 'UserController@slugUpdate')
+        ->middleware('auth:web');
+    Route::PATCH('/restore/{saUserSlug}', 'UserController@restore')
+        ->middleware('auth:web');
+    Route::DELETE('/{saUserSlug}', 'UserController@forceDestroy')
+        ->middleware('auth:web');
+});
+
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN CLIENT TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/clients'], function () {
+    Route::bind('saClientSlug', function ($slug) {
+        try {
+            $client = App\Models\Client::where('slug', $slug)->firstOrFail();
+            return $client;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saClientSlug}', 'ClientController@slugUpdate')
+        ->middleware('auth:web');
+});
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN LANGUAGE TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/languages'], function () {
+    Route::bind('saLanguageSlug', function ($slug) {
+        try {
+            $language = App\Models\Language::where('slug', $slug)->firstOrFail();
+            return $language;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saLanguageSlug}', 'LanguageController@slugUpdate')
+        ->middleware('auth:web');
+});
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN CONVERSATION TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/conversations'], function () {
+    Route::bind('saConversationSlug', function ($slug) {
+        try {
+            $conversation = App\Models\Conversation::where('slug', $slug)->firstOrFail();
+            return $conversation;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saConversationSlug}', 'ConversationController@slugUpdate')
+        ->middleware('auth:web');
+});
 
 
 /** ---------------------------------------------------------------

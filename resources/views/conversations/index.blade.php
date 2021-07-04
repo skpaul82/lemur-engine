@@ -7,7 +7,7 @@
     <div class="content">
         <div class="clearfix"></div>
 
-        @include('flash::message')
+        @include('layouts.feedback')
 
         <div class="clearfix"></div>
         <div class="box box-primary">

@@ -7,7 +7,7 @@
         </h1>
     </section>
     <div class="content">
-        @include('layouts.errors')
+        @include('layouts.feedback')
         <div class="box box-primary">
             <div class="box-body">
                 <div class="callout callout-info col-md-12">You cannot edit bot word spelling groups. If you want to update a link between a bot and a word spelling group you can delete/create them.</div>

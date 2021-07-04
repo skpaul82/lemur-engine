@@ -19,8 +19,8 @@
         <div class="input-group">
         {!! Form::text('slug', null, ['class' => 'form-control', 'id'=>"slug_field", 'readonly'=>'readonly', App\Models\Bot::getFormValidation('slug'), 'data-test'=>"slug_field"]) !!}
             <div class="input-group-btn">
-                <span name='lock' id='slug-lock-button' data-test='slug-lock-button' class='btn btn-success slug-lock-button' style="display:none"><i class='fa fa-unlock'></i></span>
-                <span name='unlock' id='slug-unlock-button' data-test='slug-unlock-button' class='btn btn-danger slug-unlock-button'><i class='fa fa-lock'></i></span>
+                <span name='unlock' id='openEditSlugDataTableModal' data-id="{{$bot->slug}}" data-test='slug-unlock-button'
+                      class='btn btn-danger slug-unlock-button'><i class='fa fa-lock'></i></span>
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
 <!-- Status Field -->
 <div class="form-group col-lg-3 col-md-3 col-sm-6 select2" data-test="status_div">
     {!! Form::label('status', 'Status:', ['data-test'=>"status_label"]) !!}
-    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [ 'disabled'=>$readonly, 'readonly'=>$readonly,  'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Bot::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
+    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [ 'disabled'=>$readonly, 'readonly'=>$readonly,  'class' => 'form-control select2 first-option', App\Models\Bot::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
 </div>
 
 

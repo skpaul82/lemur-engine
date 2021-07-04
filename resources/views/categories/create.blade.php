@@ -7,8 +7,7 @@
         </h1>
     </section>
     <div class="content">
-        @include('layouts.errors')
-        @include('flash::message')
+        @include('layouts.feedback')
         <div class="box box-primary">
             <div class="box-body add-page">
                 <div class="row">
@@ -18,8 +17,9 @@
                         @include('categories.fields')
 
                         <!-- Submit Field -->
-                        <div class="form-group col-sm-12">
-                            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            {!! Form::submit('Save And Continue', ['name'=>'action_button','class' => 'btn btn-primary pull-right']) !!}
+                            {!! Form::submit('Save', ['name'=>'action_button', 'class' => 'btn btn-primary']) !!}
                             <a href="{{ route('categories.index') }}" class="btn btn-default">Cancel</a>
                         </div>
 
@@ -33,6 +33,5 @@
 @endsection
 @push('scripts')
     {{ Html::script('js/validation.js') }}
-    {{ Html::script('js/unlock.js') }}
     {{ Html::script('js/select2.js') }}
 @endpush

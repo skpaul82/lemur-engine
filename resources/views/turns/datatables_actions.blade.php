@@ -12,4 +12,5 @@
         <i class="glyphicon glyphicon-trash"></i>
     </a>
     {!! Form::hidden('rowId', $id, ['class'=>'rowId'] ) !!}
+    {!! Form::hidden('actionId', 'edit', ['class'=>'actionId'] ) !!}
 </div>

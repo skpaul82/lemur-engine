@@ -16,4 +16,5 @@
     @endif
 
     {!! Form::hidden('rowId', $id, ['class'=>'rowId'] ) !!}
+    {!! Form::hidden('actionId', 'edit', ['class'=>'actionId'] ) !!}
 </div>

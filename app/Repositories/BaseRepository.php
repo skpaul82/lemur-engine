@@ -203,4 +203,26 @@ abstract class BaseRepository
 
         return $query->where('slug', $slug)->firstOrFail();
     }
+
+    /**
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return bool|mixed|null
+     */
+    public function forceDelete($id)
+    {
+        $query = $this->model->newQuery()->withTrashed();
+
+        $model = $query->findOrFail($id);
+
+        return $model->forceDelete();
+    }
+
+    public function withTrashed()
+    {
+        $this->model = $this->model->withTrashed();
+        return $this;
+    }
 }

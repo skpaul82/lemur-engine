@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\DataTables\ClientDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateClientRequest;
+use App\Http\Requests\UpdateBotSlugRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Http\Requests\UpdateClientSlugRequest;
+use App\Http\Requests\UpdateLanguageSlugRequest;
 use App\Models\Bot;
+use App\Models\Language;
 use App\Repositories\ClientRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -108,11 +112,22 @@ class ClientController extends AppBaseController
      * Generic message page - telling user this action is not allowed
      *
      */
-    public function edit()
+    public function edit($slug)
     {
+        $client = $this->clientRepository->getBySlug($slug);
+
+        $this->authorize('update', $client);
+
+        if (empty($client)) {
+            Flash::error('Client not found');
+
+            return redirect(route('clients.index'));
+        }
+
         //show error message page
         return view('clients.edit')->with(
-            [ 'link'=>$this->link,
+            [ 'client'=>$client,
+                'link'=>$this->link,
             'htmlTag'=>$this->htmlTag,
                 'title'=>$this->title,
             'resourceFolder'=>$this->resourceFolder]
@@ -179,5 +194,45 @@ class ClientController extends AppBaseController
         Flash::success('Client deleted successfully.');
 
         return redirect()->back();
+    }
+
+    /**
+     * Update the specified Client in storage.
+     *
+     * @param  Client $client
+     * @param UpdateClientSlugRequest $request
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function slugUpdate($client, UpdateClientSlugRequest $request)
+    {
+
+        $this->authorize('update', $client);
+
+        $inputAll=$request->all();
+
+        $clientCheck = $this->clientRepository->getBySlug($inputAll['original_slug']);
+
+        if (empty($client)||empty($clientCheck)) {
+            \Laracasts\Flash\Flash::error('Client not found');
+            return redirect(route('clients.index'));
+        }
+
+        if($clientCheck->id != $client->id){
+            Flash::error('Client slug mismatch');
+            return redirect(route('clients.index'));
+        }
+
+
+        $input['slug'] = $inputAll['slug'];
+        $client = $this->clientRepository->update($input, $client->id);
+
+        Flash::success('Client slug updated successfully.');
+
+        return redirect(route('clients.index'));
+
+
+
     }
 }

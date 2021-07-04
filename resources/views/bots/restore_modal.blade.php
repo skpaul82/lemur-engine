@@ -10,7 +10,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-warning">Are you sure you want to restore this?</div>
+                    <div class="alert alert-warning">Are you sure you want to restore this? [id: <span id="itemId"></span>]</div>
                     {{ Form::hidden('redirect_url', url()->current(),['data-test'=>"{$htmlTag}-redirect-url"]) }}
                     <div class="clearfix"></div>
                 </div>
@@ -30,10 +30,11 @@
     <script>
         $(document).ready(function() {
 
-            $(document).on('click','#openRestoreModal',function(){
+            $(document).on('click','.openRestoreModal',function(){
                 var data_id= $(this).attr('data-id');
-                var url = "/<?php echo $link;?>/"+data_id;
+                var url = "/sa/<?php echo $link;?>/restore/"+data_id;
                 $('div#restoreModal form').attr('action',url)
+                $('span#itemId').text(data_id)
                 $('div#restoreModal').modal('show');
             });
 

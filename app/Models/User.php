@@ -102,6 +102,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'slug',
         'name',
         'email',
         'password',
@@ -141,7 +142,7 @@ class User extends Authenticatable
     public static $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|string|max:255',
-        'password' => 'string|max:255',
+        'password' => 'string|max:255'
     ];
 
 
@@ -275,7 +276,7 @@ class User extends Authenticatable
     public function dataTableQuery()
     {
 
-        return User::select(['users.slug','users.id','users.name','users.email','users.created_at']);
+        return User::select(['users.deleted_at','users.slug','users.id','users.name','users.email','users.created_at'])->withTrashed();
     }
 
     /**

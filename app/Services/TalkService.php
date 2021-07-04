@@ -19,10 +19,12 @@ use App\Models\Normalization;
 use App\Models\Wildcard;
 use App\Models\WordSpelling;
 use Carbon\Carbon;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use LengthException;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class TalkService
@@ -75,6 +77,18 @@ class TalkService
         return true;
     }
 
+    public function validateRequest($request)
+    {
+
+        //is the input within the limit
+        if(!empty($request->input('message') &&
+                strlen($request->input('message')) > config('lemur.max_user_char_input'))){
+            throw new LengthException("Client message is over the allowed length");
+        }
+
+    }
+
+
     public function checkOwnerAccess($request)
     {
         $bot= $request->input('bot');
@@ -95,7 +109,6 @@ class TalkService
     {
         $startTime = Carbon::now();
 
-        //try {
         $originalInput = $input;
         $message = LemurStr::removeSentenceEnders($input['message']);
         $sentences = LemurStr::splitIntoSentences($message);

@@ -54,7 +54,11 @@ function getFormattedItem(item, field){
 
 function addRowFeatures(settings, json, linkModel, linkAction){
 
+    var actionId = 'edit'
+
     $('table#dataTableBuilder td').each(function (k,v) {
+
+
 
         if(linkModel=='searchDatatable'){
 
@@ -74,7 +78,21 @@ function addRowFeatures(settings, json, linkModel, linkAction){
                 if(!$(this).is(':last-child'))
                 {
                     var rowId = $(this).closest('td').nextAll(':has(input.rowId):first').find('input.rowId').val();
-                    window.location.href = "/"+linkModel+"/"+rowId+"/"+linkAction;
+                    if(linkAction=='inline'){
+                        actionId = $(this).closest('td').nextAll(':has(input.actionId):first').find('input.actionId').val();
+                        if(actionId=='warning_restore'){
+                            /* Alert the copied text */
+                            bootbox.alert("This item has been deleted - please restore before continuing");
+                        }else{
+                            window.location.href = "/"+linkModel+"/"+rowId+"/"+actionId;
+                        }
+
+
+
+                     }else{
+                        window.location.href = "/"+linkModel+"/"+rowId+"/"+linkAction;
+                    }
+
                 }
             })
 

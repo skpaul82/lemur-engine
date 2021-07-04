@@ -213,6 +213,11 @@ class Bot extends Model
             //always create with the default image.. we can update in a moment when we process the image
             $model->image = config('lemur.default_bot_image');
         });
+
+        static::deleting(function ($model){
+            //delete logic
+          //  $model->botProperties->delete();
+        });
     }
 
     /**
@@ -389,7 +394,8 @@ class Bot extends Model
             return Bot::select([$this->table.'.*','users.email','languages.name as language'])
                 ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id')
                 ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
-                ->myEditableItems();
+                ->myEditableItems()
+                ->withTrashed();
     }
 
     /**

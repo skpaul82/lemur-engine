@@ -52,7 +52,7 @@
 <!-- Status Field -->
 <div class="form-group col-lg-6 col-md-6 col-sm-12 select2" data-test="status_div">
     {!! Form::label('status', 'Status:', ['data-test'=>"status_label"]) !!}
-    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [  'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Category::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
+    {!! Form::select('status', config('lemur_dropdown.item_status'), null, [  'class' => 'form-control select2 first-option', App\Models\Category::getFormValidation('status'), 'data-test'=>"$htmlTag-status-select", 'id'=>"$htmlTag-status-select"]) !!}
 </div>
     <div class="clearfix"></div>
     <!-- 'Boolean delete_original' checked by default -->

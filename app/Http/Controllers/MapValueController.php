@@ -14,6 +14,7 @@ use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Response;
@@ -259,7 +260,14 @@ class MapValueController extends AppBaseController
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);
-            Flash::error('An error occurred - no changes have been made');
+
+            //display generic error
+            \Laracasts\Flash\Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 

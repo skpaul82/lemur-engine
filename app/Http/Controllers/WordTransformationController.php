@@ -11,10 +11,11 @@ use App\Models\Language;
 use App\Repositories\WordTransformationRepository;
 use App\Services\WordTransformationUploadService;
 use Exception;
-use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Laracasts\Flash\Flash;
 use Response;
 use App\Models\WordTransformation;
 
@@ -256,7 +257,14 @@ class WordTransformationController extends AppBaseController
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);
+
+            //display generic error
             Flash::error('An error occurred - no changes have been made');
+            //if admin display a little more info
+            if(Auth::user()->hasRole('admin') && (config('lemur.show_detailed_error_messages'))){
+                Flash::error($e->getMessage());
+            }
+
             return redirect()->back();
         }
 

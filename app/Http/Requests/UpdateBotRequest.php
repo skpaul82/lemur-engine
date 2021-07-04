@@ -26,6 +26,14 @@ class UpdateBotRequest extends HiddenIdRequest
      */
     public function rules()
     {
+
+        //is this a request to restore this item?
+        //if so we dont need any rules...
+        //as we are just going to un-delete it
+        if($this->input('restore',0)){
+            return [];
+        }
+
         $rules = Bot::$rules;
 
         $existingFilename = $this->input('image-filename');
@@ -40,6 +48,9 @@ class UpdateBotRequest extends HiddenIdRequest
             Rule::unique('bots')
                 ->ignore($this->slug, 'slug')
         ];
+
+
+
         return $rules;
     }
 

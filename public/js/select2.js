@@ -17,6 +17,11 @@ $(document).ready(function() {
         id: '-1'
     });
 
+    $('.select2.first-option').select2({
+        placeholder: "Please select an option",
+        id: '-1'
+    });
+
     $('.allow-new.select2').select2({
         placeholder: "Please select an option or create a new item",
         tags: true

@@ -6,9 +6,7 @@
         <div class="input-group">
         {!! Form::text('slug', null, ['class' => 'form-control', 'id'=>"slug_field", 'readonly'=>'readonly', App\Models\User::getFormValidation('slug'), 'data-test'=>"slug_field"]) !!}
             <div class="input-group-btn">
-                <span name='lock' id='slug-lock-button' data-test='slug-lock-button'
-                      class='btn btn-success slug-lock-button' style="display:none"><i class='fa fa-unlock'></i></span>
-                <span name='unlock' id='slug-unlock-button' data-test='slug-unlock-button'
+                <span name='unlock' id='openEditSlugDataTableModal' data-id="{{$user->slug}}" data-test='slug-unlock-button'
                       class='btn btn-danger slug-unlock-button'><i class='fa fa-lock'></i></span>
             </div>
         </div>

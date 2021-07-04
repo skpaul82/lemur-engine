@@ -6,6 +6,7 @@ use App\DataTables\LanguageDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateLanguageRequest;
 use App\Http\Requests\UpdateLanguageRequest;
+use App\Http\Requests\UpdateLanguageSlugRequest;
 use App\Repositories\LanguageRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -204,5 +205,45 @@ class LanguageController extends AppBaseController
         Flash::success('Language deleted successfully.');
 
         return redirect()->back();
+    }
+
+    /**
+     * Update the specified Language in storage.
+     *
+     * @param  Language $language
+     * @param UpdateLanguageSlugRequest $request
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function slugUpdate($language, UpdateLanguageSlugRequest $request)
+    {
+
+        $this->authorize('update', $language);
+
+        $inputAll=$request->all();
+
+        $languageCheck = $this->languageRepository->getBySlug($inputAll['original_slug']);
+
+        if (empty($language)||empty($languageCheck)) {
+            Flash::error('Language not found');
+            return redirect(route('languages.index'));
+        }
+
+        if($languageCheck->id != $language->id){
+            Flash::error('Language slug mismatch');
+            return redirect(route('languages.index'));
+        }
+
+
+        $input['slug'] = $inputAll['slug'];
+        $language = $this->languageRepository->update($input, $language->id);
+
+        Flash::success('Language slug updated successfully.');
+
+        return redirect(route('languages.index'));
+
+
+
     }
 }
