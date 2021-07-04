@@ -48,9 +48,16 @@ class TalkAPIController extends AppBaseController
     public function store(CreateTalkRequest $request, TalkService $talkService)
     {
 
+        dd(2);
+
         try {
             $talkService->checkAuthAccess($request);
+
+            $talkService->validateRequest($request);
+
             if (!empty($request->input('message'))) {
+
+
                 //return the service and return the response only
                 $parts = $talkService->run($request->input(), false);
                 $res = $parts['response'];

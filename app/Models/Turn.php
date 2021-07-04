@@ -217,6 +217,7 @@ class Turn extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('input')
             ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50)
             ->doNotGenerateSlugsOnUpdate();
     }
 }

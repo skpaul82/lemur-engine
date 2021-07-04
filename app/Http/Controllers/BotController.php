@@ -773,6 +773,7 @@ class BotController extends AppBaseController
         try {
             if (!empty($request->input('message'))) {
                 $talkService->checkOwnerAccess($request);
+                $talkService->validateRequest($request);
 
 
                 //return the service and return the response and debug
