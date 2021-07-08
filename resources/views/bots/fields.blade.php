@@ -82,22 +82,22 @@
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="name_div">
     {!! Form::label('name', 'Name:', ['data-test'=>"name_label"]) !!}
-    {!! Form::text('name', null, ['readonly'=>$readonly, 'class' => 'form-control', App\Models\Bot::getFormValidation('name'),'id'=>"name_field", 'data-test'=>"name_field"] ) !!}
+    {!! Form::text('name', null, ['placeholder'=>'Movie Bot', 'readonly'=>$readonly, 'class' => 'form-control', App\Models\Bot::getFormValidation('name'),'id'=>"name_field", 'data-test'=>"name_field"] ) !!}
 </div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="summary_div">
     {!! Form::label('summary', 'Summary:', ['data-test'=>"summary_label"]) !!}
-    {!! Form::text('summary', null, ['readonly'=>$readonly, 'class' => 'form-control', App\Models\Bot::getFormValidation('summary'),'id'=>"summary_field", 'data-test'=>"summary_field"] ) !!}
+    {!! Form::text('summary', null, ['placeholder'=>'A Movie Buff Bot', 'readonly'=>$readonly, 'class' => 'form-control', App\Models\Bot::getFormValidation('summary'),'id'=>"summary_field", 'data-test'=>"summary_field"] ) !!}
 </div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="description_div">
     {!! Form::label('description', 'Description:', ['data-test'=>"description_label"]) !!}
-    {!! Form::textarea('description', null, ['readonly'=>$readonly, 'rows'=>2, 'class' => 'form-control', App\Models\Bot::getFormValidation('description'),'id'=>"description_field", 'data-test'=>"description_field"] ) !!}
+    {!! Form::textarea('description', null, ['placeholder'=>'This bot talks about movies', 'readonly'=>$readonly, 'rows'=>2, 'class' => 'form-control', App\Models\Bot::getFormValidation('description'),'id'=>"description_field", 'data-test'=>"description_field"] ) !!}
 </div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="default_response">
     {!! Form::label('default_response', 'Default Response:', ['data-test'=>"default_response_label"]) !!}
-    {!! Form::text('default_response', null, ['readonly'=>$readonly,  'class' => 'form-control', App\Models\Bot::getFormValidation('default_response'),'id'=>"default_response_field", 'data-test'=>"default_response_field"] ) !!}
+    {!! Form::text('default_response', null, ['placeholder'=>'Sorry, I dont\'t understand.', 'readonly'=>$readonly,  'class' => 'form-control', App\Models\Bot::getFormValidation('default_response'),'id'=>"default_response_field", 'data-test'=>"default_response_field"] ) !!}
     <small class="help-block text-muted-wrapped" data-test="">This is the response which is returned if no matching AIML category is found</small>
 </div>
 
