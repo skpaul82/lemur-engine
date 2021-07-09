@@ -105,7 +105,7 @@
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="lemurtar_div">
     {!! Form::label('lemurtar_url', 'Lemurtar URL:', ['data-test'=>"lemurtar_label"]) !!}
     {!! Form::textarea('lemurtar_url', null, ['readonly'=>$readonly, 'rows'=>2, 'class' => 'form-control', App\Models\Bot::getFormValidation('lemurtar_url'),'id'=>"lemurtar_urlfield", 'data-test'=>"lemurtar_url_field"] ) !!}
-    <small class="help-block text-muted-wrapped" data-test="">Visit <a href="https://lemurtar.com">lemurtar.com</a> to generate a talking head avatar for your bot.</small>
+    <small class="help-block text-muted-wrapped" data-test="">Visit <a href="{!! config('lemur.lemurtar_url') !!}">{!! config('lemur.lemurtar_url') !!}</a> to generate a talking head avatar for your bot.</small>
 </div>
 
 <!-- Status Field -->
