@@ -8,11 +8,11 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.1.0'],
+        ['id' => '1.2.0'],
     'bot' =>
-        ['id' => '1.1.0'],
+        ['id' => '1.2.0'],
     'release' => [
-        'name' => 'Morton\'s Razor',
-        'description' => 'This release is dedicated to my friend and Program O dev - Dave Morton. We always wanted to rewrite Program O. It took a global pandemic for me to find the time to actually be able do it. I wish you were here to see this day - this one is for you mr!'],
+        'name' => 'Edge of Seventeen',
+        'description' => 'Slug fixes galore and some major UX improvements including hard delete of bots and related data and the restoring of soft deleted bots and users'],
 
 ];
