@@ -2937,6 +2937,24 @@ class UnitTestCategoriesTableSeeder extends Seeder
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ],
+                [
+                    'user_id' => 1,
+                    'category_group_id' => $category_group_id,
+                    'slug' => 'unit-test-foreign-char-'.$i++,
+                    'pattern' => 'UNITTEST SAY FOREIGN *',
+                    'regexp_pattern' => "UNITTEST SAY FOREIGN %",
+                    'first_letter_pattern' => "U",
+                    'topic' => "",
+                    'regexp_topic' => "",
+                    'first_letter_topic' => "",
+                    'that' => "",
+                    'regexp_that' => "",
+                    'first_letter_that' => "",
+                    'template' => "<star/>",
+                    'status' => "A",
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ],
 
         ]);
 

@@ -203,12 +203,30 @@ class CategoryGroup extends Model
      */
     public function dataTableQuery()
     {
+        $thisUserId = Auth::user()->id;
 
-        return CategoryGroup::select([$this->table.'.*',
-            'users.email as email',
-            'languages.name as language'])
-            ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
-            ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id');
+        //this is an admin so show everything
+        if(Auth::user()->hasRole('admin')){
+
+            return CategoryGroup::select([$this->table.'.*',
+                'users.email as email',
+                'languages.name as language'])
+                ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
+                ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id');
+
+        }else{
+            //this is a author so only show items which are owned by this user or are master items
+            return CategoryGroup::select([$this->table.'.*',
+                'users.email as email',
+                'languages.name as language'])
+                ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
+                ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id')
+                ->where($this->table.'.is_master', 1)
+                ->orWhere($this->table.'.user_id', $thisUserId);
+
+        }
+
+
     }
 
     /**
