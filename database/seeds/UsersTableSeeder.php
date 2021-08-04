@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
         User::find(1)->assignRole('admin');
 
         //uncomment if you want to create a test non admin person as well
-       /* DB::table('users')->insert([
+        /*DB::table('users')->insert([
             [
                 'id' => 2,
                 'slug' => 'author-adam',
@@ -49,7 +49,8 @@ class UsersTableSeeder extends Seeder
             ]
         ]);
 
-        User::find(2)->assignRole('author');*/
+        User::find(2)->assignRole('author');
+        */
 
     }
 }
