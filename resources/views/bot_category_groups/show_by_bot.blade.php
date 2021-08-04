@@ -66,9 +66,8 @@
 
 
                                             <div class="input-group-btn">
-                                                <a data-title="{!! ucwords($categoryGroup->name) !!}" data-description="{!! $categoryGroup->description !!}" id='{!! $categoryGroup->category_group_id !!}_info_button' data-test='{!! $categoryGroup->category_group_id !!}_info_button' class='btn btn-info open-info-button'><i class='fa fa-info-circle'></i></a>
 
-
+                                                <a data-title="{!! ucwords($categoryGroup->name) !!}" data-author="{!! $categoryGroup->user->email !!}" data-description="{!! $categoryGroup->description !!}" id='{!! $categoryGroup->category_group_id !!}_info_button' data-test='{!! $categoryGroup->category_group_id !!}_info_button' class='btn @if($categoryGroup->user->id != Auth::user()->id) bg-purple @else btn-info @endif open-info-button'><i class='fa fa-info-circle'></i></a>
                                                 <a href="{!! url('categories?col=1&q='.$categoryGroup->category_group_id) !!}"class="btn btn-warning show-button" data-test="show-button-0">
                                                     <i class="fa fa-tree"></i>
                                                 </a>
@@ -119,9 +118,11 @@
 
                 let title = $(this).attr('data-title');
                 let description = $(this).attr('data-description');
+                let author = $(this).attr('data-author');
 
                 //coin field - which should be disabled in this form
                 $('div#showInfoModal p#info-body').html(description);
+                $('div#showInfoModal #info-author').html(author);
                 $('div#showInfoModal #info-title').html(title);
 
                 $('div#showInfoModal').modal('show');
@@ -141,12 +142,14 @@
             <div class="modal-body">
                 <p id="info-body"></p>
                 <div class="clearfix"></div>
+
+
             </div>
             <div class="modal-footer">
+
                 <!-- Submit Field -->
-                <div class="form-group col-sm-12">
+                    <small class="pull-left">Created by: <span id="info-author"></span></small>
                     <button type="button" class="btn btn-secondary" data-test="show-info-modal-close" data-dismiss="modal">Close</button>
-                </div>
                 <div class="clearfix"></div>
             </div>
         </div>

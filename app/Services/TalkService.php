@@ -398,10 +398,10 @@ class TalkService
         $preparedSentence = $sentence;
 
         $preparedSentence = $this->applyPrePlugins($preparedSentence);
+
         $preparedSentence = LemurStr::normalizeInput($preparedSentence);
+
         $this->checkAndSetNormalizations($preparedSentence, $sentence);
-
-
 
         //initially we will check to see if there is 'learnt' response from the same client...
         if ($output =$this->aimlMatcher->matchClientCategory($preparedSentence)) {

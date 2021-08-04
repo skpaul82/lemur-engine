@@ -246,10 +246,21 @@ class Category extends Model
     public function dataTableQuery()
     {
 
-        return Category::select([$this->table.'.*', 'cg.name as filename',
+        $thisUserId = Auth::user()->id;
+
+        $query = Category::select([$this->table.'.*', 'cg.name as filename',
             'users.email'])
             ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
             ->leftJoin('category_groups as cg', 'cg.id', '=', 'categories.category_group_id');
+
+        //this is not an admin only show their own and master data
+        if (!Auth::user()->hasRole('admin')) {
+            $query = $query->where('cg.is_master', 1)
+                ->orWhere('cg.user_id', $thisUserId);
+        }
+
+        return $query;
+
     }
 
     /**

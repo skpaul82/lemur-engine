@@ -28,9 +28,9 @@ class LemurStr
         foreach (config('lemur_tag.inputOnlyNormalizations') as $in => $out) {
             $str = str_replace($in, $out, $str);
         }
-
         //replace everything but numbers
-        $str = preg_replace('/[^a-z0-9]+/i', ' ', $str);
+        $str = preg_replace('/[^a-z0-9\pL]+/iu', ' ', $str);
+
         //remove multiple whitespaces
         $str = preg_replace('/\s+/', ' ', $str);
         //trim
@@ -39,6 +39,7 @@ class LemurStr
             //convert to upper
             $str = mb_strtoupper($str);
         }
+
         return $str;
 
     }
@@ -54,7 +55,7 @@ class LemurStr
     {
 
         //replace everything but numbers
-        $str = preg_replace('/[^a-z0-9]+/i', ' ', $str);
+        $str = preg_replace('/[^a-z0-9\pL]+/iu', ' ', $str);
         //remove multiple whitespaces
         $str = preg_replace('/\s+/', ' ', $str);
         //trim
@@ -75,7 +76,7 @@ class LemurStr
      */
     public static function removeSentenceEnders($str)
     {
-        $str = preg_replace('/[^a-z0-9]+\Z/i', '', $str);
+        $str = preg_replace('/[^a-z0-9\pL]+\Z/iu', '', $str);
         //replace everything
         //$str = rtrim($str, '?!.');
         return $str;

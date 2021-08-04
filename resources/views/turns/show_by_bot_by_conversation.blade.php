@@ -20,7 +20,7 @@
                     <span class="direct-chat-name pull-right">{!! $fullConversation->client->slug !!}</span>
                     <span class="pull-left">
                         @if(!empty($item->category->slug))
-                            <a href="{!! url('/categories/'.$item->category->slug) !!}">aimlL</a> ::
+                            <a href="{!! url('/categories/'.$item->category->slug) !!}">aiml</a> ::
                         @endif
                         <ul id="log-actions">
 

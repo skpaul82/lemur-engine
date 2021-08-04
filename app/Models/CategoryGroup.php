@@ -203,12 +203,22 @@ class CategoryGroup extends Model
      */
     public function dataTableQuery()
     {
+        $thisUserId = Auth::user()->id;
 
-        return CategoryGroup::select([$this->table.'.*',
+        $query = CategoryGroup::select([$this->table.'.*',
             'users.email as email',
             'languages.name as language'])
             ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
             ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id');
+
+        //this is not an admin only show their own and master data
+        if (!Auth::user()->hasRole('admin')) {
+            $query = $query->where($this->table.'.is_master', 1)
+                ->orWhere($this->table.'.user_id', $thisUserId);
+        }
+
+        return $query;
+
     }
 
     /**

@@ -276,6 +276,8 @@ class AIMLConversationTest extends TestCase
                 'unittest exact match score test','exact dollar match'],
             'test line:'.__LINE__=>['unittest sr unittest hi',
                 'unittest sr unittest hi','Hello!'],
+            'test line:'.__LINE__=>['unittest say foreign sì vorrei una valùtazione gratuita',
+                'unittest say foreign sì vorrei una valùtazione gratuita','sì vorrei una valùtazione gratuita'],
 
 
         ];
