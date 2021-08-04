@@ -93,6 +93,8 @@
                                     <button type="submit" class="btn btn-primary btn-flat">Send</button>
                                 </span>
                             </div>
+                            <span id="convo-help-message" class="help-block form-info">Type: 'start a new conversation' to start again</span>
+
                         </form>
                     </div>
                     <!-- /.box-footer-->
@@ -125,7 +127,10 @@
                                 @if(!empty($sentences))
                                     <li><a href="#sentence-debug" data-toggle="tab">Sentences Debug</a></li>
                                 @endif
-
+                                @if(!empty($response))
+                                    <li><a href="#chat-plain" data-toggle="tab">Plain Chat</a></li>
+                                    <li><a href="{!! url('/bot/logs/'.$bot->slug.'/'.$conversation->slug.'/download') !!}">Download</a></li>
+                                @endif
 
                             </ul>
                             <div class="tab-content">
@@ -211,6 +216,21 @@
                                 <!-- /.tab-pane -->
                                 @endhasrole
 
+                            @if(!empty($response))
+                                <!-- /.tab-pane -->
+
+                                    <div class="tab-pane" id="chat-plain">
+<pre><code>
+@foreach($conversation->conversationHumanLogs as $index => $item)<span class="text-wrapped">User: {!! $item->input !!}</span>
+<span class="text-muted-wrapped">Bot: {!! $item->output !!}</span>
+
+@endforeach
+</code></pre>
+                                    </div>
+
+
+                                    <!-- /.tab-pane -->
+                            @endif
 
                                 @if(!empty($sentences))
                                     <!-- /.tab-pane -->
@@ -224,6 +244,7 @@
                                             @endif
 
                                         </div>
+
                                         <!-- /.tab-pane -->
                                 @endif
 

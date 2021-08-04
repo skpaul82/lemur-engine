@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateConversationSlugRequest;
 use App\Http\Requests\UpdateLanguageSlugRequest;
 use App\Models\Bot;
 use App\Models\Language;
+use App\Models\Turn;
 use App\Repositories\ConversationRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -194,5 +195,38 @@ class ConversationController extends AppBaseController
 
 
 
+    }
+
+    public function downloadCsv($botId, $conversationSlug)
+    {
+
+        $conversation = Conversation::where('slug', $conversationSlug)->where('bot_id', $botId)->first();
+        $turnsArr = Turn::select(['input','output'])->where('conversation_id', $conversation->id)
+            ->where('source', 'human')->latest('id')->get()->toArray();
+
+
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+            ,   'Content-type'        => 'text/csv'
+            ,   'Content-Disposition' => 'attachment; filename='.$conversation->slug.'.csv'
+            ,   'Expires'             => '0'
+            ,   'Pragma'              => 'public'
+        ];
+
+
+
+
+        # add headers for each column in the CSV download
+        array_unshift($turnsArr, array_keys($turnsArr[0]));
+
+        $callback = function () use ($turnsArr) {
+            $FH = fopen('php://output', 'w');
+            foreach ($turnsArr as $row) {
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

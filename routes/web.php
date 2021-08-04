@@ -335,6 +335,8 @@ Route::group(['prefix' => '/bot'], function () {
     ->middleware('auth:web');
     Route::GET('/logs/{botSlug}/list', 'BotController@conversations')
     ->middleware('auth:web');
+    Route::GET('/logs/{botSlug}/{conversationSlug}/download', 'ConversationController@downloadCsv')
+        ->middleware('auth:web');
     Route::GET('/logs/{botSlug}/{conversationSlug}', 'BotController@conversations')
     ->middleware('auth:web');
     Route::GET('/plugins/{botSlug}/list', 'BotController@botPlugins')
