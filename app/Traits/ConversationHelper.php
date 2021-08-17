@@ -77,8 +77,11 @@ trait ConversationHelper
      */
     public function getTurnCountAttribute()
     {
-        return $this->turns()->count();
+
+        return $this->humanTurns()->count();
     }
+
+
 
     public function currentConversationTurn()
     {
