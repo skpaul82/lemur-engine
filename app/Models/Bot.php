@@ -374,7 +374,8 @@ class Bot extends Model
     {
         $date = Carbon::now()->subDays(28);
         return $this->hasManyThrough(\App\Models\Turn::class, \App\Models\Conversation::class)
-            ->whereDate('turns.created_at', '>=', $date);
+            ->whereDate('turns.created_at', '>=', $date)
+            ->where('turns.source', 'human');
     }
 
 
