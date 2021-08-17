@@ -118,7 +118,10 @@ class ConversationDataTable extends DataTable
             'id'=> ['name'=>'conversations.id','data'=>'id','title'=>'#'],
             'slug' => ['title'=>'Id'],
             'bot'=> ['name'=>'bots.slug','data'=>'bot','title'=>'BotId'],
-            'client'=> ['title'=>'ClientId'],
+            'client'=> ['name'=>'clients.slug','data'=>'client','title'=>'ClientId'],
+
+
+
             'allow_html' => ['name'=>'allow_html','data'=>'allow_html','title'=>'HTML?','searchable'=>true,
                 'printable'=>true, 'exportable'=>true,'defaultContent'=>'null', 'render' =>
                 function () {

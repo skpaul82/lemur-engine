@@ -177,6 +177,15 @@ class Conversation extends Model
         return $this->hasMany(\App\Models\Turn::class, 'conversation_id');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function humanTurns()
+    {
+        return $this->hasMany(\App\Models\Turn::class, 'conversation_id')->where('source', 'human');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
