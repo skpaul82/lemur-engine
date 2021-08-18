@@ -22,6 +22,7 @@ class BotStatsService
 
     public function getAllTimeTurnStats($bot){
         return Turn::where('conversations.bot_id',$bot->id)
+            ->where('turns.source', 'human')
             ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
             ->count();
     }
@@ -36,6 +37,7 @@ class BotStatsService
         return Turn::where('conversations.bot_id',$bot->id)
             ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
             ->whereDate('turns.created_at', '=', Carbon::now()->toDateString())
+            ->where('turns.source', 'human')
             ->count();
     }
 
@@ -59,6 +61,7 @@ class BotStatsService
             ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
             ->where('conversations.bot_id',$bot->id)
             ->whereDate('turns.created_at', '>=', Carbon::now()->subMonths(11)->firstOfMonth()->toDateString())
+            ->where('turns.source', 'human')
             ->groupBy('year', 'month')
             ->orderBy('year', 'asc')
             ->orderBy('month', 'asc')
@@ -85,6 +88,7 @@ class BotStatsService
             ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
             ->where('conversations.bot_id',$bot->id)
             ->whereDate('turns.created_at', '>=', Carbon::now()->firstOfMonth()->toDateString())
+            ->where('turns.source', 'human')
             ->groupBy('day')
             ->orderBy('day', 'asc')
             ->pluck('data','day');
